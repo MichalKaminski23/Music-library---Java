@@ -11,6 +11,7 @@ public class Song
 {
     public Song(String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime) 
     {
+        this.songID = songCounter++;
         this.songName = songName;
         this.composerName = composerName;
         this.composerSurname = composerSurname;
@@ -28,6 +29,19 @@ public class Song
     private String releaseDate;
     
     private int songTime; //in seconds
+    
+    static int songCounter = 1;
+    private int songID;
+
+    public int getSongID() 
+    {
+        return songID;
+    }
+
+    public void setSongID(int songID) 
+    {
+        this.songID = songID;
+    }
 
     public String getSongName() 
     {

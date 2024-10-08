@@ -4,7 +4,6 @@
  */
 package View;
 import Model.Song;
-import Model.SongList;
 import java.util.ArrayList;
 /**
  *
@@ -16,9 +15,21 @@ public class SongListView
     
     public void printSongList(ArrayList<Song> songs)
     {
-        for(int i = 0; i < songs.size(); i++)
+        if(songs.size() == 0)
         {
-            songView.printSongInformation(songs.get(i));
+            System.out.println("");
+            System.out.println("There is no song in the list. Add a new song first.");
+            System.out.println("");
+        }
+        else
+        {
+           for(int i = 0; i < songs.size(); i++)
+           {
+                System.out.println("");
+                songView.printSongInformation(songs.get(i));
+                System.out.println("");
+            }
+           
         }
     }
 }

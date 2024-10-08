@@ -9,9 +9,11 @@ import Model.Song;
  * @author placu
  */
 public class SongView 
-{
-    public void printSongInformation(String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime)
+{ 
+    
+    public void printSongInformation(int songID, String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime)
     {
+        System.out.println("Song ID: " + songID);
         System.out.println("Song: " + songName);
         System.out.println("Writer: " + composerName + " " + composerSurname);
         System.out.println("Album: " + songAlbum);
@@ -21,6 +23,7 @@ public class SongView
     
     public void printSongInformation(Song newSong)
     {
+        System.out.println("Song ID: " + newSong.getSongID());
         System.out.println("Song: " + newSong.getSongName());
         System.out.println("Writer: " + newSong.getComposerName() + " " + newSong.getComposerSurname());
         System.out.println("Album: " + newSong.getSongAlbum());

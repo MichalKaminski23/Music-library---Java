@@ -82,6 +82,6 @@ public class SongController
     
     public void printView() 
     {
-        view.printSongInformation(model.getSongName(), model.getComposerName(), model.getComposerSurname(), model.getSongAlbum(), model.getReleaseDate(), (int) model.getSongTime());
+        view.printSongInformation(model.getSongID(), model.getSongName(), model.getComposerName(), model.getComposerSurname(), model.getSongAlbum(), model.getReleaseDate(), (int) model.getSongTime());
     }
 }

@@ -4,6 +4,7 @@
  */
 package Controller;
 import Model.SongList;
+//import Model.Song;
 import View.SongListView;
 /**
  *
@@ -23,6 +24,16 @@ public class SongListController
     public void createNewSong(String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime)
     {
         model.addSongToList(songName, composerName, composerSurname, songAlbum, releaseDate, songTime);
+    }
+    
+    public void removeSong(String songName)
+    {
+        model.removeSongFromListByName(songName);
+    }
+    
+    public void removeSong(int songID)
+    {
+        model.removeSongFromListByID(songID);
     }
     
     public void updateView()
