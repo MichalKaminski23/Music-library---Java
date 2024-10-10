@@ -3,30 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+import java.time.LocalDate;
 /**
  *
  * @author placu
  */
 public class Song 
 {
-    public Song(String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime) 
+    public Song(String songTitle, String composerName, String composerSurname, String songAlbum, LocalDate songRelease, int songTime) 
     {
         this.songID = songCounter++;
-        this.songName = songName;
+        this.songTitle = songTitle;
         this.composerName = composerName;
         this.composerSurname = composerSurname;
         this.songAlbum = songAlbum;
-        this.releaseDate = releaseDate;
+        this.songRelease = songRelease;
         this.songTime = songTime;
     }
     
-    private String songName;
+    private String songTitle;
     
     private String composerName;
     private String composerSurname;
     
     private String songAlbum;
-    private String releaseDate;
+    private LocalDate songRelease;
     
     private int songTime; //in seconds
     
@@ -43,14 +44,14 @@ public class Song
         this.songID = songID;
     }
 
-    public String getSongName() 
+    public String getSongTitle() 
     {
-        return songName;
+        return songTitle;
     }
 
-    public void setSongName(String songName) 
+    public void setSongTitle(String songTitle) 
     {
-        this.songName = songName;
+        this.songTitle = songTitle;
     }
 
     public String getComposerName() 
@@ -83,14 +84,14 @@ public class Song
         this.songAlbum = songAlbum;
     }
 
-    public String getReleaseDate() 
+    public LocalDate getReleaseDate() 
     {
-        return releaseDate;
+        return songRelease;
     }
 
-    public void setReleaseDate(String releaseDate) 
+    public void setReleaseDate(LocalDate songRelease) 
     {
-        this.releaseDate = releaseDate;
+        this.songRelease = songRelease;
     }
 
     public float getSongTime() 

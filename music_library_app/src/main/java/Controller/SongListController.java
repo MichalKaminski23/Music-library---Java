@@ -4,8 +4,8 @@
  */
 package Controller;
 import Model.SongList;
-//import Model.Song;
 import View.SongListView;
+import java.time.LocalDate;
 /**
  *
  * @author placu
@@ -21,7 +21,7 @@ public class SongListController
         this.view = view;
     }
     
-    public void createNewSong(String songName, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime)
+    public void createNewSong(String songName, String composerName, String composerSurname, String songAlbum, LocalDate releaseDate, int songTime)
     {
         model.addSongToList(songName, composerName, composerSurname, songAlbum, releaseDate, songTime);
     }
@@ -39,6 +39,11 @@ public class SongListController
     public void updateView()
     {
         view.printSongList(model.songs);
+    }
+    
+    public void editSong(int songID, String newSongTitle, String newComposerName, String newComposerSurname, String newSongAlbum, LocalDate newReleaseDate, int newSongTime)
+    {
+        model.updateSong(songID, newSongTitle, newComposerName, newComposerSurname, newSongAlbum, newReleaseDate, newSongTime);
     }
     
 }

@@ -5,6 +5,7 @@
 package Controller;
 import Model.Song;
 import View.SongView;
+import java.time.LocalDate;
 /**
  *
  * @author placu
@@ -20,14 +21,14 @@ public class SongController
         this.view = view;
     }
 
-    public void setSongName(String name)
+    public void setSongName(String songTitle)
     {
-        model.setSongName(name);
+        model.setSongTitle(songTitle);
     }
 
     public String getSongName() 
     {
-        return model.getSongName();
+        return model.getSongTitle();
     }
 
     public void setSongComposerName(String name)
@@ -60,12 +61,12 @@ public class SongController
         return model.getSongAlbum();
     }
             
-    public void setSongReleaseDate(String releaseDate)
+    public void setSongReleaseDate(LocalDate songRelease)
     {
-        model.setReleaseDate(releaseDate);
+        model.setReleaseDate(songRelease);
     }
     
-    public String getSongReleaseDate(String releaseDate)
+    public LocalDate getSongReleaseDate(LocalDate songRelease)
     {
         return model.getReleaseDate();
     }
@@ -82,6 +83,6 @@ public class SongController
     
     public void printView() 
     {
-        view.printSongInformation(model.getSongID(), model.getSongName(), model.getComposerName(), model.getComposerSurname(), model.getSongAlbum(), model.getReleaseDate(), (int) model.getSongTime());
+        view.printSongInformation(model.getSongID(), model.getSongTitle(), model.getComposerName(), model.getComposerSurname(), model.getSongAlbum(), model.getReleaseDate().toString(), (int) model.getSongTime());
     }
 }
