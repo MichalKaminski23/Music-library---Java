@@ -3,16 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package View;
+
 import Model.Song;
+
 /**
  *
  * @author placu
  */
-public class SongView 
-{ 
-    
-    public void printSongInformation(int songID, String songTitle, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime)
-    {
+public class SongView {
+
+    public void printSongInformation(int songID, String songTitle, String composerName, String composerSurname, String songAlbum, String releaseDate, int songTime) {
         System.out.println("Song ID: " + songID);
         System.out.println("Song: " + songTitle);
         System.out.println("Writer: " + composerName + " " + composerSurname);
@@ -20,9 +20,8 @@ public class SongView
         System.out.println("Release date: " + releaseDate);
         System.out.println("Time: " + songTime + "s");
     }
-    
-    public void printSongInformation(Song newSong)
-    {
+
+    public void printSongInformation(Song newSong) {
         System.out.println("Song ID: " + newSong.getSongID());
         System.out.println("Song: " + newSong.getSongTitle());
         System.out.println("Writer: " + newSong.getComposerName() + " " + newSong.getComposerSurname());
