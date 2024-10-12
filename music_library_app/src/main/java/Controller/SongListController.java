@@ -1,43 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Model.SongList;
 import View.SongListView;
-import java.time.LocalDate;
 import Model.StringIsEmptyException;
 import Model.InvalidIntException;
-import Model.ArraySizeIsZeroException;
-import java.time.format.DateTimeFormatter;
+import Model.InvalidDateFormatException;
 import java.util.Scanner;
 
 /**
  *
- * @author placu
+ * @author Michal Kaminski
  */
 public class SongListController {
 
+    /**
+     *
+     */
     public SongList model;
+
+    /**
+     *
+     */
     public SongListView view;
 
+    /**
+     *
+     * @param model
+     * @param view
+     */
     public SongListController(SongList model, SongListView view) {
         this.model = model;
         this.view = view;
     }
 
+    /**
+     *
+     */
     public void createNewSong() {
-        Scanner scanner = new Scanner(System.in);
-        String songTitle;
-        String authorName;
-        String authorSurname;
-        String songAlbum;
-        int songTime;
-        LocalDate songRelease = null;
-        String dateInput;
-
         try {
+            Scanner scanner = new Scanner(System.in);
+            String songTitle;
+            String authorName;
+            String authorSurname;
+            String songAlbum;
+            String songTimeInput;
+            String songRelease;
+
             System.out.println("Write your song paremeters:");
 
             System.out.print("Title of the song: ");
@@ -52,105 +60,120 @@ public class SongListController {
             System.out.print("Album of the song (or no): ");
             songAlbum = scanner.nextLine();
 
-            System.out.print("Release date (YYYY-MM-DD): ");
-            dateInput = scanner.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            songRelease = LocalDate.parse(dateInput, formatter);
+            System.out.print("Release date (DD-MM-YYYY): ");
+            songRelease = scanner.nextLine();
 
             System.out.print("Time of the song [s]: ");
-            songTime = scanner.nextInt();
+            songTimeInput = scanner.nextLine();
 
-            model.addSongToList(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime);
-        } catch (StringIsEmptyException e) {
-            System.err.println(e.getMessage());
-        } catch (InvalidIntException e) {
+            model.addSongToList(songTitle, authorName, authorSurname, songAlbum, songRelease, songTimeInput);
+            System.out.println("Song added successfully.");
+
+        } catch (StringIsEmptyException | InvalidIntException | InvalidDateFormatException e) {
             System.err.println(e.getMessage());
         }
     }
 
+    /**
+     *
+     */
     public void removeSong() {
-        Scanner scanner = new Scanner(System.in);
-        String songTitle;
         try {
-            System.out.print("Choose method to remove the song: n = by name, i = by id: ");
-            String removeChoice = scanner.next();
-            scanner.nextLine();
+            if (model.songs.isEmpty()) {
+                System.out.println("The song list is empty. No songs to remove.");
+                return;
+            } else {
+                Scanner scanner = new Scanner(System.in);
+                String songTitle;
+                System.out.print("Choose method to remove the song: n = by name, i = by id: ");
+                String removeChoice = scanner.nextLine();
 
-            if (removeChoice.equals("n")) {
-                System.out.print("Enter the name: ");
+                switch (removeChoice) {
+                    case "n":
+                        System.out.print("Enter the name: ");
+                        songTitle = scanner.nextLine();
+                        model.removeSongFromListByName(songTitle);
+                        break;
+                    case "i":
+                        System.out.print("Enter the ID: ");
+                        String songID = scanner.nextLine();
+                        model.removeSongFromListByID(songID);
+                        break;
+                    default:
+                        System.out.println("---------------------");
+                        System.out.println("Bad paremeter of method.");
+                        System.out.println("---------------------");
+                        break;
+                }
+            }
+        } catch (InvalidIntException | StringIsEmptyException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     *
+     */
+    public void updateView() {
+        if (model.songs.isEmpty()) {
+            System.out.println("Your library size is 0.");
+            return;
+        } else {
+            System.out.println("Your music library: ");
+            view.printSongList(model.songs);
+        }
+    }
+
+    /**
+     *
+     */
+    public void editSong() {
+        try {
+            if (model.songs.isEmpty()) {
+                System.out.println("The song list is empty. No songs to edit.");
+                return;
+            } else {
+                Scanner scanner = new Scanner(System.in);
+
+                String chooseID;
+                String songTitle;
+                String authorName;
+                String authorSurname;
+                String songAlbum;
+                String songTimeInput;
+                String songRelease;
+
+                System.out.print("Choose song ID to edit this song: ");
+                chooseID = scanner.nextLine();
+
+                if (chooseID.isBlank()) {
+                    System.out.println("The song ID can't be empty.");
+                    return;
+                }
+
+                System.out.print("Enter the new title: ");
                 songTitle = scanner.nextLine();
 
-                model.removeSongFromListByName(songTitle);
+                System.out.print("Enter the new author's name: ");
+                authorName = scanner.nextLine();
 
-            } else if (removeChoice.equals("i")) {
-                System.out.print("Enter the ID: ");
-                int songID = scanner.nextInt();
-                model.removeSongFromListByID(songID);
-            } else {
-                System.out.println("---------------------");
-                System.out.println("Bad paremeter of method.");
-                System.out.println("---------------------");
+                System.out.print("Enter the new author's surname: ");
+                authorSurname = scanner.nextLine();
 
+                System.out.print("Enter the new song's album: ");
+                songAlbum = scanner.nextLine();
+
+                System.out.print("Enter the new song's release date (DD-MM-YYYY): ");
+                songRelease = scanner.nextLine();
+
+                System.out.print("Enter the new song's duration time: ");
+                songTimeInput = scanner.nextLine();
+
+                model.updateSong(chooseID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTimeInput);
+
+                System.out.println("Song updated successfuly");
             }
-        } catch (ArraySizeIsZeroException e) {
-            System.err.println(e.getMessage());
-        } catch (InvalidIntException e) {
-            System.err.println(e.getMessage());
-        } catch (StringIsEmptyException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    public void updateView() {
-        try {
-            view.printSongList(model.songs);
-        } catch (ArraySizeIsZeroException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    public void editSong() {
-        Scanner scanner = new Scanner(System.in);
-        String songTitle;
-        String authorName;
-        String authorSurname;
-        String songAlbum;
-        int songTime;
-        LocalDate songRelease = null;
-        String dateInput;
-
-        try {
-            System.out.print("Choose song ID to edit this song: ");
-            int chooseID = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Enter the new title: ");
-            songTitle = scanner.nextLine();
-
-            System.out.print("Enter the new author's name: ");
-            authorName = scanner.nextLine();
-
-            System.out.print("Enter the new author's surname: ");
-            authorSurname = scanner.nextLine();
-
-            System.out.print("Enter the new song's album: ");
-            songAlbum = scanner.nextLine();
-
-            System.out.print("Release date (YYYY-MM-DD): ");
-            dateInput = scanner.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            songRelease = LocalDate.parse(dateInput, formatter);
-
-            System.out.print("Enter the new song's duration time: ");
-            songTime = scanner.nextInt();
-
-            model.updateSong(chooseID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTime);
-
-        } catch (StringIsEmptyException e) {
-            System.err.println(e.getMessage());
-        } catch (InvalidIntException e) {
-            System.err.println(e.getMessage());
-        } catch (ArraySizeIsZeroException e) {
+        } catch (StringIsEmptyException | InvalidIntException | InvalidDateFormatException e) {
             System.err.println(e.getMessage());
         }
 

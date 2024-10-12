@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import Model.Song;
@@ -10,12 +6,12 @@ import java.time.LocalDate;
 
 /**
  *
- * @author placu
+ * @author Michal Kaminski
  */
 public class SongController {
 
-    private Song model;
-    private SongView view;
+    private final Song model;
+    private final SongView view;
 
     public SongController(Song model, SongView view) {
         this.model = model;
