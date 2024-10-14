@@ -6,13 +6,40 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
+ * The SongList class manages a collection of songs. It provides methods to add,
+ * remove, and update songs in the list.
  *
  * @author Michal Kaminski
+ * @version 1.0
  */
 public class SongList {
 
+    /**
+     * Empty constructor for the SongList class.
+     */
+    @SuppressWarnings("empty-statement")
+    public SongList() {
+        ;
+    }
+
+    /**
+     * List to store Song objects
+     */
     public ArrayList<Song> songs = new ArrayList<Song>();
 
+    /**
+     * Adds a new song to the list.
+     *
+     * @param songTitle The title of the song
+     * @param composerName The name of the composer
+     * @param composerSurname The surname of the composer
+     * @param songAlbum The album of the song
+     * @param songReleaseInput The release date in string format (DD-MM-YYYY)
+     * @param songTimeInput The duration of the song in string format
+     * @throws StringIsEmptyException If any string input is empty
+     * @throws InvalidIntException If song time is not a valid integer
+     * @throws InvalidDateFormatException If the date format is invalid
+     */
     public void addSongToList(String songTitle, String composerName, String composerSurname, String songAlbum, String songReleaseInput, String songTimeInput) throws StringIsEmptyException, InvalidIntException, InvalidDateFormatException {
 
         LocalDate songRelease = null;
@@ -23,7 +50,7 @@ public class SongList {
         for (Song song : songs) {
             if (song.getSongTitle().equalsIgnoreCase(songTitle)) {
                 System.out.println("");
-                System.out.println("A song with this title already exists: " + songTitle + "edit this song or create another title");
+                System.out.println("A song with this title already exists: " + songTitle + " edit this song or create another title");
                 return;
             }
         }
@@ -48,9 +75,9 @@ public class SongList {
             throw new StringIsEmptyException("Song album can't be empty!");
         }
 
-        try {
+        if (isValidDateFormat(songReleaseInput, formatter)) {
             songRelease = LocalDate.parse(songReleaseInput, formatter);
-        } catch (DateTimeParseException e) {
+        } else {
             throw new InvalidDateFormatException("Invalid date format. Please use DD-MM-YYYY.");
         }
 
@@ -62,8 +89,36 @@ public class SongList {
 
         Song newSong = new Song(songTitle, composerName, composerSurname, songAlbum, songRelease, songTime);
         songs.add(newSong);
+        System.out.println("Song added successfully.");
     }
 
+    /**
+     * Checks if the given date string matches the expected date format.
+     *
+     * This method attempts to parse the input date string using the provided if
+     * the parsing succeeds, the date format is considered valid; otherwise, it
+     * is invalid.
+     *
+     * @param dateInput The date string to be checked.
+     * @param formatter The formatter used to parse the date string.
+     * @return {@code true} if the date string is valid according to the
+     * specified formatter; {@code false} otherwise.
+     */
+    private boolean isValidDateFormat(String dateInput, DateTimeFormatter formatter) {
+        try {
+            LocalDate.parse(dateInput, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Removes a song from the list by title.
+     *
+     * @param songTitle The title of the song to be removed
+     * @throws StringIsEmptyException If the song title is empty
+     */
     public void removeSongFromListByName(String songTitle) throws StringIsEmptyException {
 
         if (songTitle.isBlank()) {
@@ -73,6 +128,7 @@ public class SongList {
 
         Song songToRemove = null;
         int indexToRemove = -1;
+
         for (int i = 0; i < songs.size(); i++) {
             if (songs.get(i).getSongTitle().equals(songTitle)) {
                 songToRemove = songs.get(i);
@@ -96,6 +152,13 @@ public class SongList {
 
     }
 
+    /**
+     * Removes a song from the list by ID.
+     *
+     * @param songIDInput The ID of the song to be removed
+     * @throws StringIsEmptyException If the song ID input is empty
+     * @throws InvalidIntException If the song ID is not a valid integer
+     */
     public void removeSongFromListByID(String songIDInput) throws StringIsEmptyException, InvalidIntException {
 
         int songID;
@@ -105,11 +168,11 @@ public class SongList {
             throw new StringIsEmptyException("Song ID can't be a string!");
         }
 
-        try {
-            songID = Integer.parseInt(songIDInput);
-        } catch (NumberFormatException e) {
+        if (!songIDInput.matches("\\d+")) {
             throw new InvalidIntException("Invalid input: Song ID must be a number.");
         }
+
+        songID = Integer.parseInt(songIDInput);
 
         Song songToRemove = null;
         int indexToRemove = -1;
@@ -136,6 +199,21 @@ public class SongList {
 
     }
 
+    /**
+     * Updates the details of a song in the list.
+     *
+     * @param songIDInput The ID of the song to be updated
+     * @param newSongTitle The new title of the song
+     * @param newComposerName The new name of the composer
+     * @param newComposerSurname The new surname of the composer
+     * @param newSongAlbum The new album of the song
+     * @param newSongReleaseInput The new release date in string format
+     * (DD-MM-YYYY)
+     * @param newSongTimeInput The new duration of the song in string format
+     * @throws StringIsEmptyException If any string input is empty
+     * @throws InvalidIntException If song time or songID is not a valid integer
+     * @throws InvalidDateFormatException If the date format is invalid
+     */
     public void updateSong(String songIDInput, String newSongTitle, String newComposerName, String newComposerSurname, String newSongAlbum, String newSongReleaseInput, String newSongTimeInput) throws StringIsEmptyException, InvalidIntException, InvalidDateFormatException {
 
         LocalDate newTempReleaseDate = LocalDate.parse("2000-01-01");
@@ -150,11 +228,11 @@ public class SongList {
             throw new StringIsEmptyException("Song ID can't be string!");
         }
 
-        try {
-            songID = Integer.parseInt(songIDInput);
-        } catch (NumberFormatException e) {
+        if (!songIDInput.matches("\\d+")) {
             throw new InvalidIntException("Invalid input: Song ID must be a number.");
         }
+
+        songID = Integer.parseInt(songIDInput);
 
         if (newSongTitle.isBlank()) {
             System.out.println("");
@@ -184,12 +262,12 @@ public class SongList {
             songs.get(songID - 1).setSongAlbum(newSongAlbum);
         }
 
-        try {
+        if (isValidDateFormat(newSongReleaseInput, formatter)) {
             songRelease = LocalDate.parse(newSongReleaseInput, formatter);
-        } catch (DateTimeParseException e) {
+            songs.get(songID - 1).setReleaseDate(songRelease);
+        } else {
             throw new InvalidDateFormatException("Invalid date format. Please use DD-MM-YYYY.");
         }
-        songs.get(songID - 1).setReleaseDate(songRelease);
 
         songTime = Integer.parseInt(newSongTimeInput);
         if (songTime <= 0 || newSongTimeInput.isBlank()) {

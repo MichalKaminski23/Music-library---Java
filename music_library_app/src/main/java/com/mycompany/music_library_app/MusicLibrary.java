@@ -6,17 +6,30 @@ import View.SongListView;
 import java.util.Scanner;
 
 /**
+ * The main class of the project with simple menu in which user can call
+ * functions from other classes.
  *
  * @author Michal Kaminski
+ * @version 1.0
  */
-//TODO komentarze (javadoc), args
 public class MusicLibrary {
 
     /**
+     * Empty constructor for the MusicLibrary class.
+     */
+    @SuppressWarnings("empty-statement")
+    public MusicLibrary() {
+        ;
+    }
+
+    /**
+     * Main method of application uses the classes defined in different
+     * packages.
      *
-     * @param args
+     * @param args command line parameters
      */
     public static void main(String[] args) {
+
         System.out.println("Your music library - enjoy!");
         System.out.println("");
 
