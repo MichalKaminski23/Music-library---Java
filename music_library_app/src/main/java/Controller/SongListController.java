@@ -3,9 +3,7 @@ package Controller;
 import Model.SongList;
 import View.SongListView;
 import View.MessageErrorPrinter;
-import Model.StringIsEmptyException;
-import Model.InvalidIntException;
-import Model.InvalidDateFormatException;
+import Model.WrongInputException;
 import java.util.Scanner;
 
 /**
@@ -19,19 +17,20 @@ import java.util.Scanner;
 public class SongListController {
 
     /**
-     * Object from MessageErrorPrinter class to print error messages caught in exceptions.
+     * Object from MessageErrorPrinter class to print error messages caught in
+     * exceptions.
      */
     MessageErrorPrinter messageErrorPrinter = new MessageErrorPrinter();
-            
+
     /**
      * The model representing the list of songs.
      */
-    public SongList model;
+    private final SongList model;
 
     /**
      * The view responsible for displaying the list of songs.
      */
-    public SongListView view;
+    private final SongListView view;
 
     /**
      * Constructs the controller with the provided model and view.
@@ -81,7 +80,7 @@ public class SongListController {
 
             model.addSongToList(songTitle, authorName, authorSurname, songAlbum, songRelease, songTimeInput);
 
-        } catch (StringIsEmptyException | InvalidIntException | InvalidDateFormatException e) {
+        } catch (WrongInputException e) {
             messageErrorPrinter.printMessage(e.getMessage());
         }
     }
@@ -119,7 +118,7 @@ public class SongListController {
                         break;
                 }
             }
-        } catch (InvalidIntException | StringIsEmptyException e) {
+        } catch (WrongInputException e) {
             messageErrorPrinter.printMessage(e.getMessage());
         }
     }
@@ -167,6 +166,13 @@ public class SongListController {
                     return;
                 }
 
+                int chooseIDInt = Integer.parseInt(chooseID);
+
+                if (chooseIDInt <= 0) {
+                    System.out.println("The song ID can't be <= 0.");
+                    return;
+                }
+
                 System.out.print("Enter the new title: ");
                 songTitle = scanner.nextLine();
 
@@ -187,9 +193,9 @@ public class SongListController {
 
                 model.updateSong(chooseID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTimeInput);
 
-                System.out.println("Song updated successfuly");
+                System.out.println("Song updated successfuly.");
             }
-        } catch (StringIsEmptyException | InvalidIntException | InvalidDateFormatException e) {
+        } catch (WrongInputException e) {
             messageErrorPrinter.printMessage(e.getMessage());
         }
 

@@ -11,7 +11,6 @@ import Model.Song;
  */
 public class SongView {
 
-    
     /**
      * Empty constructor for the SongView class.
      */

@@ -1,6 +1,6 @@
 /**
- * This package contains the view classes responsible for displaying
- * the user interface and presenting data to the user.
+ * This package contains the view classes responsible for
+ * presenting data to the user.
  * It formats and outputs information related to songs and
  * song lists in a readable manner.
  *

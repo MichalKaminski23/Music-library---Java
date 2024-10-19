@@ -32,7 +32,7 @@ public class SongController {
      *
      * @param songTitle The title of the song
      */
-    public void setSongName(String songTitle) {
+    public void setSongTitle(String songTitle) {
         model.setSongTitle(songTitle);
     }
 
@@ -41,7 +41,7 @@ public class SongController {
      *
      * @return The title of the song
      */
-    public String getSongName() {
+    public String getSongTitle() {
         return model.getSongTitle();
     }
 

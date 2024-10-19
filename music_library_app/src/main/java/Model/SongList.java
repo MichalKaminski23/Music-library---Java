@@ -36,11 +36,9 @@ public class SongList {
      * @param songAlbum The album of the song
      * @param songReleaseInput The release date in string format (DD-MM-YYYY)
      * @param songTimeInput The duration of the song in string format
-     * @throws StringIsEmptyException If any string input is empty
-     * @throws InvalidIntException If song time is not a valid integer
-     * @throws InvalidDateFormatException If the date format is invalid
+     * @throws WrongInputException If any string input is empty or bad
      */
-    public void addSongToList(String songTitle, String composerName, String composerSurname, String songAlbum, String songReleaseInput, String songTimeInput) throws StringIsEmptyException, InvalidIntException, InvalidDateFormatException {
+    public void addSongToList(String songTitle, String composerName, String composerSurname, String songAlbum, String songReleaseInput, String songTimeInput) throws WrongInputException {
 
         LocalDate songRelease = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -57,34 +55,34 @@ public class SongList {
 
         if (songTitle.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song title can't be empty!");
+            throw new WrongInputException("Song title can't be empty!");
         }
 
         if (composerName.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Composer name can't be empty!");
+            throw new WrongInputException("Composer name can't be empty!");
         }
 
         if (composerSurname.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Composer surname can't be empty!");
+            throw new WrongInputException("Composer surname can't be empty!");
         }
 
         if (songAlbum.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song album can't be empty!");
+            throw new WrongInputException("Song album can't be empty!");
         }
 
         if (isValidDateFormat(songReleaseInput, formatter)) {
             songRelease = LocalDate.parse(songReleaseInput, formatter);
         } else {
-            throw new InvalidDateFormatException("Invalid date format. Please use DD-MM-YYYY.");
+            throw new WrongInputException("Invalid date format. Please use DD-MM-YYYY.");
         }
 
         songTime = Integer.parseInt(songTimeInput);
         if (songTime <= 0 || songTimeInput.isBlank()) {
             System.out.println("");
-            throw new InvalidIntException("Song time can't be lower than 0 or be a float!");
+            throw new WrongInputException("Song time can't be lower than 0 or be a float!");
         }
 
         Song newSong = new Song(songTitle, composerName, composerSurname, songAlbum, songRelease, songTime);
@@ -117,13 +115,13 @@ public class SongList {
      * Removes a song from the list by title.
      *
      * @param songTitle The title of the song to be removed
-     * @throws StringIsEmptyException If the song title is empty
+     * @throws WrongInputException If the song title is empty
      */
-    public void removeSongFromListByName(String songTitle) throws StringIsEmptyException {
+    public void removeSongFromListByName(String songTitle) throws WrongInputException {
 
         if (songTitle.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song title can't be null!");
+            throw new WrongInputException("Song title can't be null!");
         }
 
         Song songToRemove = null;
@@ -156,20 +154,19 @@ public class SongList {
      * Removes a song from the list by ID.
      *
      * @param songIDInput The ID of the song to be removed
-     * @throws StringIsEmptyException If the song ID input is empty
-     * @throws InvalidIntException If the song ID is not a valid integer
+     * @throws WrongInputException If the songID input is empty
      */
-    public void removeSongFromListByID(String songIDInput) throws StringIsEmptyException, InvalidIntException {
+    public void removeSongFromListByID(String songIDInput) throws WrongInputException {
 
         int songID;
 
         if (songIDInput.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song ID can't be a string!");
+            throw new WrongInputException("Song ID can't be a string!");
         }
 
         if (!songIDInput.matches("\\d+")) {
-            throw new InvalidIntException("Invalid input: Song ID must be a number.");
+            throw new WrongInputException("Invalid input: Song ID must be a number.");
         }
 
         songID = Integer.parseInt(songIDInput);
@@ -210,11 +207,9 @@ public class SongList {
      * @param newSongReleaseInput The new release date in string format
      * (DD-MM-YYYY)
      * @param newSongTimeInput The new duration of the song in string format
-     * @throws StringIsEmptyException If any string input is empty
-     * @throws InvalidIntException If song time or songID is not a valid integer
-     * @throws InvalidDateFormatException If the date format is invalid
+     * @throws WrongInputException If any string input is empty or bad
      */
-    public void updateSong(String songIDInput, String newSongTitle, String newComposerName, String newComposerSurname, String newSongAlbum, String newSongReleaseInput, String newSongTimeInput) throws StringIsEmptyException, InvalidIntException, InvalidDateFormatException {
+    public void updateSong(String songIDInput, String newSongTitle, String newComposerName, String newComposerSurname, String newSongAlbum, String newSongReleaseInput, String newSongTimeInput) throws WrongInputException {
 
         LocalDate newTempReleaseDate = LocalDate.parse("2000-01-01");
         LocalDate songRelease = null;
@@ -225,39 +220,39 @@ public class SongList {
 
         if (songIDInput.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song ID can't be string!");
+            throw new WrongInputException("Song ID can't be string!");
         }
 
         if (!songIDInput.matches("\\d+")) {
-            throw new InvalidIntException("Invalid input: Song ID must be a number.");
+            throw new WrongInputException("Invalid input: Song ID must be a number.");
         }
 
         songID = Integer.parseInt(songIDInput);
 
         if (newSongTitle.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song title can't be empty!");
+            throw new WrongInputException("Song title can't be empty!");
         } else {
             songs.get(songID - 1).setSongTitle(newSongTitle);
         }
 
         if (newComposerName.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Composer name can't be empty!");
+            throw new WrongInputException("Composer name can't be empty!");
         } else {
             songs.get(songID - 1).setComposerName(newComposerName);
         }
 
         if (newComposerSurname.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Composer surname can't be empty!");
+            throw new WrongInputException("Composer surname can't be empty!");
         } else {
             songs.get(songID - 1).setComposerSurname(newComposerSurname);
         }
 
         if (newSongAlbum.isBlank()) {
             System.out.println("");
-            throw new StringIsEmptyException("Song album can't be empty!");
+            throw new WrongInputException("Song album can't be empty!");
         } else {
             songs.get(songID - 1).setSongAlbum(newSongAlbum);
         }
@@ -266,13 +261,13 @@ public class SongList {
             songRelease = LocalDate.parse(newSongReleaseInput, formatter);
             songs.get(songID - 1).setReleaseDate(songRelease);
         } else {
-            throw new InvalidDateFormatException("Invalid date format. Please use DD-MM-YYYY.");
+            throw new WrongInputException("Invalid date format. Please use DD-MM-YYYY.");
         }
 
         songTime = Integer.parseInt(newSongTimeInput);
         if (songTime <= 0 || newSongTimeInput.isBlank()) {
             System.out.println("");
-            throw new InvalidIntException("Song time can't be lower than 0 or be a float!");
+            throw new WrongInputException("Song time can't be lower than 0 or be a float!");
         } else {
             songs.get(songID - 1).setSongTime(songTime);
         }
