@@ -1,0 +1,9 @@
+mk\musiclibrarygui\models\SongList.class
+mk\musiclibrarygui\controllers\AuthorController.class
+mk\musiclibrarygui\controllers\MusicTableController.class
+mk\musiclibrarygui\App.class
+mk\musiclibrarygui\models\WrongInputException.class
+mk\musiclibrarygui\controllers\AddSongScreenController.class
+module-info.class
+mk\musiclibrarygui\controllers\MenuController.class
+mk\musiclibrarygui\models\Song.class

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mk.musiclibrarygui.controllers.MusicTableController">
+   <children>
+      <Button fx:id="addSongButton" accessibleText="Add new song (CTRL+A)" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#addNewSong" onKeyPressed="#handleAddSongEvent" prefHeight="75.0" prefWidth="150.0" text="Add song">
+         <font>
+            <Font name="Comic Sans MS" size="24.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Add new song (CTRL+A)">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Button>
+      <Button fx:id="removeSongButton" accessibleText="Remove selected song (DELETE)" layoutX="275.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeSelectedSong" onKeyPressed="#handleRemoveSongEvent" prefHeight="75.0" prefWidth="150.0" text="Remove song">
+         <font>
+            <Font name="Comic Sans MS" size="19.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Remove selected song (DELETE)">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Button>
+      <Button fx:id="goBackButton" accessibleText="Go to the menu (CTRL+E)" layoutX="536.0" layoutY="361.0" mnemonicParsing="false" onAction="#goBack" onKeyPressed="#handleGoBackEvent" prefHeight="75.0" prefWidth="150.0" text="Go back">
+         <font>
+            <Font name="Comic Sans MS" size="24.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Go to the menu (CTRL+E)">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Button>
+      <TableView fx:id="table" accessibleText="Table with your songs (ESCAPE)" layoutX="12.0" layoutY="14.0" onKeyPressed="#handleTableExitEvent" prefHeight="306.0" prefWidth="676.0">
+        <columns>
+            <TableColumn fx:id="songID" prefWidth="35.0" resizable="false" text="ID" />
+            <TableColumn fx:id="songTitle" prefWidth="115.0" resizable="false" text="Title" />
+            <TableColumn fx:id="authorName" prefWidth="115.0" resizable="false" text="Name" />
+            <TableColumn fx:id="authorSurname" prefWidth="115.0" resizable="false" text="Surname" />
+            <TableColumn fx:id="songAlbum" prefWidth="115.0" resizable="false" text="Album" />
+            <TableColumn fx:id="songRelease" prefWidth="115.0" resizable="false" text="Release" />
+            <TableColumn fx:id="songTime" prefWidth="65.0" resizable="false" text="Time" />
+        </columns>
+         <tooltip>
+            <Tooltip text="Table with your songs (ESCAPE)">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </TableView>
+      <Label fx:id="errorLabel" layoutX="205.0" layoutY="320.0" prefHeight="38.0" prefWidth="479.0" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Comic Sans MS" size="27.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Information">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Label>
+   </children>
+</AnchorPane>
