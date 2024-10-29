@@ -18,6 +18,14 @@ import mk.musiclibrarygui.App;
 public class MenuController {
 
     /**
+     * Empty constructor for the MenuController class.
+     */
+    @SuppressWarnings("empty-statement")
+    public MenuController() {
+        ;
+    }
+
+    /**
      * Button to navigate to the credits screen.
      */
     @FXML

@@ -17,6 +17,14 @@ import mk.musiclibrarygui.App;
 public class AuthorController {
 
     /**
+     * Empty constructor for the AuthorController class.
+     */
+    @SuppressWarnings("empty-statement")
+    public AuthorController() {
+        ;
+    }
+
+    /**
      * Button to navigate back to the main menu.
      */
     @FXML

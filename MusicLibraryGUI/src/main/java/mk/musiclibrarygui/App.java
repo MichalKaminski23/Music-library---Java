@@ -19,6 +19,14 @@ import mk.musiclibrarygui.models.SongList;
  */
 public class App extends Application {
 
+    /**
+     * Empty constructor for the App class.
+     */
+    @SuppressWarnings("empty-statement")
+    public App() {
+        ;
+    }
+    
     private static Scene scene;
     private static SongList songList;
 

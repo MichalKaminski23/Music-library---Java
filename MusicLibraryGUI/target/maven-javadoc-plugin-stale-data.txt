@@ -1,0 +1,59 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+@argfile
+--class-path
+'C:/Users/placu/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/placu/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/placu/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/placu/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar'
+--module-path
+'C:/Users/placu/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/placu/Music-library---Java/MusicLibraryGUI/target/classes;C:/Users/placu/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/placu/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;C:/Users/placu/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar'
+--patch-module
+mk.musiclibrarygui='C:/Users/placu/Music-library---Java/MusicLibraryGUI/src/main/java'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'C:/Users/placu/Music-library---Java/MusicLibraryGUI/target/reports/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/placu/Music-library---Java/MusicLibraryGUI/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'MusicLibraryGUI 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/placu/Music-library---Java/MusicLibraryGUI/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'MusicLibraryGUI 1.0-SNAPSHOT API'
+mk.musiclibrarygui
+mk.musiclibrarygui.controllers
+mk.musiclibrarygui.models
+'C:/Users/placu/Music-library---Java/MusicLibraryGUI/src/main/java/module-info.java'
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\allclasses-index.html = 1730213303498
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\allpackages-index.html = 1730213303502
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\copy.svg = 1730213303567
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\element-list = 1730213303308
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\help-doc.html = 1730213303549
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\index-all.html = 1730213303530
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\index.html = 1730213303536
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\link.svg = 1730213303569
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\member-search-index.js = 1730213303508
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\module-search-index.js = 1730213303504
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\overview-tree.html = 1730213303475
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\package-search-index.js = 1730213303505
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\script.js = 1730213303565
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\search-page.js = 1730213303577
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\search.html = 1730213303533
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\search.js = 1730213303573
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\serialized-form.html = 1730213303383
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\stylesheet.css = 1730213303562
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\tag-search-index.js = 1730213303510
+C:\Users\placu\Music-library---Java\MusicLibraryGUI\target\reports\apidocs\type-search-index.js = 1730213303507
