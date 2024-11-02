@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import mk.musiclibrarygui.App;
+import mk.musiclibrarygui.models.SongList;
 
 /**
  * Controller for the main menu of the music library application. Manages
@@ -16,6 +17,34 @@ import mk.musiclibrarygui.App;
  * @version 2.0
  */
 public class MenuController {
+
+    /**
+     * Reference to the main application instance, used for managing scene
+     * transitions. This allows the controller to request navigation to
+     * different screens within the application.
+     */
+    private App app;
+
+    /**
+     * The list of songs to which the new song will be added.
+     */
+    private SongList songList;
+
+    /**
+     * Constructs a MenuController with the specified song list and application
+     * instance. This controller manages the main menu screen of the
+     * application, facilitating navigation and access to various features
+     * within the application.
+     *
+     * @param songList The SongList instance containing all songs managed by the
+     * application
+     * @param app The main App instance that oversees the application's
+     * lifecycle and navigation
+     */
+    public MenuController(SongList songList, App app) {
+        this.songList = songList;
+        this.app = app;
+    }
 
     /**
      * Button to navigate to the credits screen.
@@ -43,7 +72,7 @@ public class MenuController {
      */
     @FXML
     private void showAuthor(ActionEvent event) throws IOException {
-        App.setRoot("/mk/musiclibrarygui/views/Author");
+        app.setRoot("/mk/musiclibrarygui/views/Author");
     }
 
     /**
@@ -54,7 +83,7 @@ public class MenuController {
      */
     @FXML
     private void showLibrary(ActionEvent event) throws IOException {
-        App.setRoot("/mk/musiclibrarygui/views/MusicTable");
+        app.setRoot("/mk/musiclibrarygui/views/MusicTable");
     }
 
     /**

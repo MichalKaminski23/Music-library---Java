@@ -23,10 +23,9 @@ module mk.musiclibrarygui {
     requires javafx.fxml;
     requires java.base;
 
-    opens mk.musiclibrarygui to javafx.fxml;
     opens mk.musiclibrarygui.controllers to javafx.fxml;
-    
-    opens mk.musiclibrarygui.models to javafx.base;
-   
+       
     exports mk.musiclibrarygui;
+    exports mk.musiclibrarygui.controllers;
+    exports mk.musiclibrarygui.models;
 }

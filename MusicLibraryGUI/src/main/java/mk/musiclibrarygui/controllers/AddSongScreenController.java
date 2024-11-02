@@ -22,6 +22,13 @@ import mk.musiclibrarygui.models.WrongInputException;
 public class AddSongScreenController {
 
     /**
+     * Reference to the main application instance, used for managing scene
+     * transitions. This allows the controller to request navigation to
+     * different screens within the application.
+     */
+    private App app;
+
+    /**
      * Text field for entering the song title.
      */
     @FXML
@@ -81,12 +88,18 @@ public class AddSongScreenController {
     private SongList songList;
 
     /**
-     * Constructor that accepts a SongList instance for adding new songs.
+     * Constructs an AddSongScreenController with the specified song list and
+     * application instance. This controller is responsible for handling the
+     * addition of new songs to the song list within the application.
      *
-     * @param songList the song list to which new songs will be added
+     * @param songList The SongList instance containing all songs managed by the
+     * application
+     * @param app The main App instance that manages the application's lifecycle
+     * and navigation
      */
-    public AddSongScreenController(SongList songList) {
+    public AddSongScreenController(SongList songList, App app) {
         this.songList = songList;
+        this.app = app;
     }
 
     /**
@@ -108,7 +121,7 @@ public class AddSongScreenController {
                     releaseField.getText(),
                     timeField.getText()
             );
-            App.setRoot("/mk/musiclibrarygui/views/MusicTable");
+            app.setRoot("/mk/musiclibrarygui/views/MusicTable");
 
         } catch (WrongInputException e) {
             errorLabel.setText(e.getMessage());
@@ -124,7 +137,7 @@ public class AddSongScreenController {
      */
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-        App.setRoot("/mk/musiclibrarygui/views/MusicTable");
+        app.setRoot("/mk/musiclibrarygui/views/MusicTable");
     }
 
     /**

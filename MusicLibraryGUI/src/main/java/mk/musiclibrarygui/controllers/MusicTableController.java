@@ -27,6 +27,13 @@ import mk.musiclibrarygui.models.WrongInputException;
 public class MusicTableController {
 
     /**
+     * Reference to the main application instance, used for managing scene
+     * transitions. This allows the controller to request navigation to
+     * different screens within the application.
+     */
+    private App app;
+
+    /**
      * The table view displaying the list of songs.
      */
     @FXML
@@ -104,12 +111,19 @@ public class MusicTableController {
     private final SongList songList;
 
     /**
-     * Constructs a MusicTableController with the specified SongList.
+     * Constructs a MusicTableController with the specified song list and
+     * application instance. This controller manages the music table view,
+     * displaying the list of songs in a structured format and allowing user
+     * interaction with individual song entries.
      *
-     * @param songList the list of songs to manage
+     * @param songList The SongList instance containing all songs to be
+     * displayed in the table view
+     * @param app The main App instance that controls the application's
+     * navigation and lifecycle
      */
-    public MusicTableController(SongList songList) {
+    public MusicTableController(SongList songList, App app) {
         this.songList = songList;
+        this.app = app;
     }
 
     /**
@@ -251,7 +265,7 @@ public class MusicTableController {
      */
     @FXML
     private void addNewSong(ActionEvent event) throws IOException {
-        App.setRoot("/mk/musiclibrarygui/views/AddSongScreen");
+        app.setRoot("/mk/musiclibrarygui/views/AddSongScreen");
     }
 
     /**
@@ -305,7 +319,7 @@ public class MusicTableController {
      */
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-        App.setRoot("/mk/musiclibrarygui/views/Menu");
+        app.setRoot("/mk/musiclibrarygui/views/Menu");
     }
 
     /**
