@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import lombok.Data;
+
 /**
  * The SongList class manages a collection of Song objects, providing methods to
  * add, delete, and retrieve songs.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
+@Data
 public class SongList {
 
     /**
@@ -28,15 +31,6 @@ public class SongList {
         allSongs.add(new Song("Example title 3", "Example name 3", "Example surname 3", "Example album 3", "03.12.2003", "422"));
         allSongs.add(new Song("Example title 4", "Example name 4", "Example surname 4", "Example album 4", "04.12.2003", "423"));
         allSongs.add(new Song("Example title 5", "Example name 5", "Example surname 5", "Example album 5", "05.12.2003", "424"));
-    }
-
-    /**
-     * Retrieves the list of all songs.
-     *
-     * @return An ArrayList containing all the songs
-     */
-    public ArrayList<Song> getAllSongs() {
-        return allSongs;
     }
 
     /**

@@ -16,12 +16,13 @@
  * The mk.musiclibrarygui package is exported for use by other modules.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 module mk.musiclibrarygui {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;
+    requires lombok;
 
     opens mk.musiclibrarygui.controllers to javafx.fxml;
        

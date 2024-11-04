@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"mk.musiclibrarygui","l":"mk.musiclibrarygui"},{"m":"mk.musiclibrarygui","l":"mk.musiclibrarygui.controllers"},{"m":"mk.musiclibrarygui","l":"mk.musiclibrarygui.models"}];updateSearchResults();

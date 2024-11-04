@@ -1,12 +1,15 @@
 package mk.musiclibrarygui.models;
 
+import lombok.Data;
+
 /**
  * The Song class represents a musical track with information about its ID,
  * title, composer, album, release date, and duration.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
+@Data
 public class Song {
 
     /**
@@ -70,33 +73,6 @@ public class Song {
     }
 
     /**
-     * Gets the unique ID of the song.
-     *
-     * @return The song's ID
-     */
-    public int getSongID() {
-        return songID;
-    }
-
-    /**
-     * Sets the unique ID for the song.
-     *
-     * @param songID The song's new ID
-     */
-    public void setSongID(int songID) {
-        this.songID = songID;
-    }
-
-    /**
-     * Gets the title of the song.
-     *
-     * @return The song's title
-     */
-    public String getSongTitle() {
-        return songTitle;
-    }
-
-    /**
      * Sets the title of the song.
      *
      * @param songTitle The new title of the song
@@ -107,15 +83,6 @@ public class Song {
             throw new WrongInputException("Song title can't be empty!");
         }
         this.songTitle = songTitle;
-    }
-
-    /**
-     * Gets the composer's first name.
-     *
-     * @return The composer's first name
-     */
-    public String getAuthorName() {
-        return authorName;
     }
 
     /**
@@ -132,15 +99,6 @@ public class Song {
     }
 
     /**
-     * Gets the composer's surname.
-     *
-     * @return The composer's surname
-     */
-    public String getAuthorSurname() {
-        return authorSurname;
-    }
-
-    /**
      * Sets the composer's surname.
      *
      * @param authorSurname The new surname of the composer
@@ -151,15 +109,6 @@ public class Song {
             throw new WrongInputException("Author surname can't be empty!");
         }
         this.authorSurname = authorSurname;
-    }
-
-    /**
-     * Gets the album name of the song.
-     *
-     * @return The song's album name
-     */
-    public String getSongAlbum() {
-        return songAlbum;
     }
 
     /**
@@ -176,15 +125,6 @@ public class Song {
     }
 
     /**
-     * Gets the release date of the song.
-     *
-     * @return The release date of the song
-     */
-    public String getSongRelease() {
-        return songRelease;
-    }
-
-    /**
      * Sets the release date of the song.
      *
      * @param songRelease The new release date of the song
@@ -195,15 +135,6 @@ public class Song {
             throw new WrongInputException("Invalid date format! Please use dd.MM.yyyy.");
         }
         this.songRelease = songRelease;
-    }
-
-    /**
-     * Gets the duration of the song in seconds.
-     *
-     * @return The song's duration in seconds
-     */
-    public String getSongTime() {
-        return songTime;
     }
 
     /**
