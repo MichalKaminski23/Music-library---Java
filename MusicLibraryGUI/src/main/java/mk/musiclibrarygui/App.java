@@ -10,13 +10,16 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import mk.musiclibrarygui.models.SongList;
+//Odnośnie finalnej wersji ćw 3 - z poprzednich labów warunki są, kolekcja bezpieczna (ArrayList - SongList); for-each (porówywanie tytułów - SongList); 
+//rekordy (nie ma bo nie ma gdzie ich zrobić); Lombok (jest w modelach), jeden z 5 elementów (wyrażenie lambda (ze zdefiniowanym interfejsem) - SongList),
+//lambda ze strumieniem (przycisk co wyświetla fajne ciekawostki - SongList oraz MusicTable)
 
 /**
  * Main application class for the Music Library GUI. Initializes the application
  * and loads the main scene.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class App extends Application {
 
@@ -105,5 +108,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import mk.musiclibrarygui.App;
 import mk.musiclibrarygui.models.SongList;
+import mk.musiclibrarygui.models.SongTitleChecker;
 import mk.musiclibrarygui.models.WrongInputException;
 
 /**
@@ -17,16 +18,28 @@ import mk.musiclibrarygui.models.WrongInputException;
  * facilitates adding new songs to the SongList.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class AddSongScreenController {
 
+    /**
+     * A SongTitleChecker instance that checks if the existing song title is the
+     * same as the new song title, ignoring case differences. This lambda
+     * expression provides a convenient way to enforce title uniqueness when
+     * adding or editing songs in the music library.
+     *
+     * The comparison is case-insensitive, meaning that titles such as "My Song"
+     * and "my song" will be considered identical.
+     */
+    private final SongTitleChecker titleChecker = (existingTitle, newTitle)
+            -> existingTitle.equalsIgnoreCase(newTitle);
+    
     /**
      * Reference to the main application instance, used for managing scene
      * transitions. This allows the controller to request navigation to
      * different screens within the application.
      */
-    private App app;
+    private final App app;
 
     /**
      * Text field for entering the song title.
@@ -85,7 +98,7 @@ public class AddSongScreenController {
     /**
      * The list of songs to which the new song will be added.
      */
-    private SongList songList;
+    private final SongList songList;
 
     /**
      * Constructs an AddSongScreenController with the specified song list and
@@ -119,7 +132,8 @@ public class AddSongScreenController {
                     surnameField.getText(),
                     albumField.getText(),
                     releaseField.getText(),
-                    timeField.getText()
+                    timeField.getText(),
+                    titleChecker
             );
             app.setRoot("/mk/musiclibrarygui/views/MusicTable");
 
@@ -165,5 +179,4 @@ public class AddSongScreenController {
             this.goBackButton.fire();
         }
     }
-
 }

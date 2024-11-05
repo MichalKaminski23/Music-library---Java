@@ -7,3 +7,4 @@ mk\musiclibrarygui\controllers\AddSongScreenController.class
 module-info.class
 mk\musiclibrarygui\controllers\MenuController.class
 mk\musiclibrarygui\models\Song.class
+mk\musiclibrarygui\models\SongTitleChecker.class

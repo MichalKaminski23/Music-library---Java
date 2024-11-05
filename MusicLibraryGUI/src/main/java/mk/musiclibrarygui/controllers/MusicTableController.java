@@ -4,17 +4,21 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import mk.musiclibrarygui.App;
 import mk.musiclibrarygui.models.Song;
 import mk.musiclibrarygui.models.SongList;
+import mk.musiclibrarygui.models.SongTitleChecker;
 import mk.musiclibrarygui.models.WrongInputException;
 
 /**
@@ -22,16 +26,28 @@ import mk.musiclibrarygui.models.WrongInputException;
  * and remove songs from the music library.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class MusicTableController {
+
+    /**
+     * A SongTitleChecker instance that checks if the existing song title is the
+     * same as the new song title, ignoring case differences. This lambda
+     * expression provides a convenient way to enforce title uniqueness when
+     * adding or editing songs in the music library.
+     *
+     * The comparison is case-insensitive, meaning that titles such as "My Song"
+     * and "my song" will be considered identical.
+     */
+    private final SongTitleChecker titleChecker = (existingTitle, newTitle)
+            -> existingTitle.equalsIgnoreCase(newTitle);
 
     /**
      * Reference to the main application instance, used for managing scene
      * transitions. This allows the controller to request navigation to
      * different screens within the application.
      */
-    private App app;
+    private final App app;
 
     /**
      * The table view displaying the list of songs.
@@ -100,6 +116,12 @@ public class MusicTableController {
     private Button removeSongButton;
 
     /**
+     * Button for showing some info.
+     */
+    @FXML
+    private Button someStatsButton;
+
+    /**
      * Button for navigating back to the previous menu.
      */
     @FXML
@@ -149,14 +171,11 @@ public class MusicTableController {
         table.setEditable(true);
 
         table.setOnKeyPressed(event -> {
-            try {
-                handleRemoveSongEvent(event);
-                handleAddSongEvent(event);
-                handleGoBackEvent(event);
-                handleTableExitEvent(event);
-            } catch (WrongInputException ex) {
-                ex.printStackTrace();
-            }
+            handleRemoveSongEvent(event);
+            handleAddSongEvent(event);
+            handleGoBackEvent(event);
+            handleShowStatsEvent(event);
+            handleTableExitEvent(event);
         });
 
         makeColumnsEditable();
@@ -174,6 +193,7 @@ public class MusicTableController {
             try {
                 Song song = event.getRowValue();
                 String newTitle = event.getNewValue();
+                songList.compareSongTitles(newTitle, titleChecker);
                 song.setSongTitle(newTitle);
             } catch (WrongInputException e) {
                 showErrorDialog(e.getMessage());
@@ -253,6 +273,30 @@ public class MusicTableController {
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Displays an info dialog with the specified label and message, where each
+     * line is displayed separately.
+     *
+     * @param label the header label of the dialog
+     * @param message the message to display in the info dialog
+     */
+    private void showInfoAlert(String label, String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Some stats");
+        alert.setHeaderText(label);
+
+        TextArea textArea = new TextArea(message);
+        textArea.setWrapText(true);
+        textArea.setEditable(false);
+
+        textArea.setPrefWidth(400);
+        textArea.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        alert.getDialogPane().setContent(textArea);
         alert.showAndWait();
     }
 
@@ -307,7 +351,22 @@ public class MusicTableController {
         } catch (WrongInputException e) {
             showErrorDialog(e.getMessage());
         }
+    }
 
+    /**
+     * Handles the action of displaying statistics when the corresponding event
+     * is triggered. This method retrieves and shows information about unique
+     * authors, the number of songs in each album, the shortest song, and the
+     * longest song in the library using information from the song list.
+     *
+     * @param event the action event triggered when this method is called
+     */
+    @FXML
+    void showStats(ActionEvent event) {
+        showInfoAlert("Unique authors: ", songList.getUniqueAuthors());
+        showInfoAlert("Songs in albums: ", songList.getSongCountPerAlbum());
+        showInfoAlert("The shortest song in the library: ", songList.getTheShortestSong());
+        showInfoAlert("The longest song in the library: ", songList.getTheLongestSong());
     }
 
     /**
@@ -351,12 +410,24 @@ public class MusicTableController {
      * pressed.
      *
      * @param event the key event triggered by the keyboard
-     * @throws WrongInputException if there is an issue with the input
      */
     @FXML
-    private void handleRemoveSongEvent(KeyEvent event) throws WrongInputException {
+    private void handleRemoveSongEvent(KeyEvent event) {
         if (event.getCode() == KeyCode.DELETE) {
             this.removeSongButton.fire();
+        }
+    }
+
+    /**
+     * Handles keyboard events to show the window with some stats when Ctrl+S is
+     * pressed.
+     *
+     * @param event the key event triggered by the keyboard
+     */
+    @FXML
+    void handleShowStatsEvent(KeyEvent event) {
+        if (event.isControlDown() && event.getCode() == KeyCode.S) {
+            this.someStatsButton.fire();
         }
     }
 
@@ -372,5 +443,4 @@ public class MusicTableController {
             event.consume();
         }
     }
-
 }

@@ -3,6 +3,6 @@
  * It includes classes for managing songs, handling song lists, and a custom exception.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 package mk.musiclibrarygui.models;

@@ -22,7 +22,7 @@
             </Tooltip>
          </tooltip>
       </Button>
-      <Button fx:id="removeSongButton" accessibleText="Remove selected song (DELETE)" layoutX="275.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeSelectedSong" onKeyPressed="#handleRemoveSongEvent" prefHeight="75.0" prefWidth="150.0" text="Remove song">
+      <Button fx:id="removeSongButton" accessibleText="Remove selected song (DELETE)" layoutX="185.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeSelectedSong" onKeyPressed="#handleRemoveSongEvent" prefHeight="75.0" prefWidth="150.0" text="Remove song">
          <font>
             <Font name="Comic Sans MS" size="19.0" />
          </font>
@@ -76,5 +76,16 @@
             </Tooltip>
          </tooltip>
       </Label>
+      <Button fx:id="someStatsButton" accessibleText="Show some stats (CTRL+S)" layoutX="370.0" layoutY="361.0" mnemonicParsing="false" onAction="#showStats" onKeyPressed="#handleShowStatsEvent" prefHeight="75.0" prefWidth="150.0" text="Some stats">
+         <font>
+            <Font name="Comic Sans MS" size="22.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Show some songs stats (CTRL+S)">
+               <font>
+                  <Font name="Comic Sans MS" size="32.0" />
+               </font></Tooltip>
+         </tooltip>
+      </Button>
    </children>
 </AnchorPane>

@@ -14,7 +14,7 @@ import mk.musiclibrarygui.models.SongList;
  * navigation to different screens and application exit.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class MenuController {
 
@@ -23,12 +23,12 @@ public class MenuController {
      * transitions. This allows the controller to request navigation to
      * different screens within the application.
      */
-    private App app;
+    private final App app;
 
     /**
      * The list of songs to which the new song will be added.
      */
-    private SongList songList;
+    private final SongList songList;
 
     /**
      * Constructs a MenuController with the specified song list and application
@@ -134,5 +134,4 @@ public class MenuController {
             this.exitButton.fire();
         }
     }
-
 }

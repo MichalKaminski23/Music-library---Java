@@ -13,21 +13,21 @@ import mk.musiclibrarygui.models.SongList;
  * Controller for the Author screen. Manages navigation back to the main menu.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class AuthorController {
 
     /**
      * The list of songs to which the new song will be added.
      */
-    private SongList songList;
+    private final SongList songList;
 
     /**
      * Reference to the main application instance, used for managing scene
      * transitions. This allows the controller to request navigation to
      * different screens within the application.
      */
-    private App app;
+    private final App app;
 
     /**
      * Button to navigate back to the main menu.

@@ -1,6 +1,10 @@
 package mk.musiclibrarygui.models;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -42,11 +46,13 @@ public class SongList {
      * @param songAlbum The album name the song belongs to
      * @param songRelease The release date of the song
      * @param songTime The duration of the song in seconds
+     * @param titleChecker A functional interface to define the title comparison
+     * logic
      * @throws WrongInputException if any input is invalid
      */
-    public void addSong(String songTitle, String authorName, String authorSurname, String songAlbum, String songRelease, String songTime) throws WrongInputException {
+    public void addSong(String songTitle, String authorName, String authorSurname, String songAlbum, String songRelease, String songTime, SongTitleChecker titleChecker) throws WrongInputException {
         for (Song song : allSongs) {
-            if (song.getSongTitle().equalsIgnoreCase(songTitle)) {
+            if (titleChecker.checkTitle(song.getSongTitle(), songTitle)) {
                 throw new WrongInputException("A song with this title already exists: " + songTitle);
             }
         }
@@ -65,6 +71,26 @@ public class SongList {
     }
 
     /**
+     * Checks if the specified title already exists among the current song
+     * titles in the list to ensure each song has a unique title. Utilizes a
+     * {@link SongTitleChecker} functional interface to compare titles. If a
+     * song with the same title is found, an exception is thrown.
+     *
+     * @param songNewTitle The title of the song to be compared for uniqueness
+     * @param titleChecker A functional interface to define the title comparison
+     * logic
+     * @throws WrongInputException if a song with the specified title already
+     * exists
+     */
+    public void compareSongTitles(String songNewTitle, SongTitleChecker titleChecker) throws WrongInputException {
+        for (Song song : allSongs) {
+            if (titleChecker.checkTitle(song.getSongTitle(), songNewTitle)) {
+                throw new WrongInputException("A song with this title already exists: " + songNewTitle);
+            }
+        }
+    }
+
+    /**
      * Retrieves a song by its index in the list.
      *
      * @param index The index of the song to retrieve
@@ -73,7 +99,7 @@ public class SongList {
      */
     public Song getOneByIndex(int index) throws WrongInputException {
         if (index < 0 || index >= allSongs.size()) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+            throw new WrongInputException("Index out of bounds: " + index);
         }
         return allSongs.get(index);
     }
@@ -86,7 +112,7 @@ public class SongList {
      */
     public void deleteOneByIndex(int index) throws WrongInputException {
         if (index < 0 || index >= allSongs.size()) {
-            throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+            throw new WrongInputException("Index out of bounds: " + index);
         }
         this.allSongs.remove(index);
     }
@@ -109,4 +135,74 @@ public class SongList {
         return FXCollections.observableArrayList(allSongs);
     }
 
+    /**
+     * Retrieves a set of unique authors from the song list and formats the
+     * result as a string where each author's name is displayed on a separate
+     * line.
+     *
+     * @return a formatted string containing unique authors
+     */
+    public String getUniqueAuthors() {
+        if (allSongs.isEmpty()) {
+            return "No songs available";
+        }
+
+        Set<String> uniqueAuthors = allSongs.stream()
+                .map(song -> song.getAuthorName() + " " + song.getAuthorSurname())
+                .collect(Collectors.toSet());
+
+        StringBuilder result = new StringBuilder();
+        uniqueAuthors.forEach(author
+                -> result.append(author).append("\n")
+        );
+
+        return result.toString();
+    }
+
+    /**
+     * Retrieves the count of songs per album and formats the result as a string
+     * where each album and its corresponding count are displayed on separate
+     * lines.
+     *
+     * @return a formatted string containing album names and their respective
+     * song counts
+     */
+    public String getSongCountPerAlbum() {
+        if (allSongs.isEmpty()) {
+            return "No songs available";
+        }
+        Map<String, Long> songCountMap = allSongs.stream()
+                .collect(Collectors.groupingBy(Song::getSongAlbum, Collectors.counting()));
+
+        StringBuilder result = new StringBuilder();
+        songCountMap.forEach((album, count)
+                -> result.append(album).append(": ").append(count).append("\n")
+        );
+
+        return result.toString();
+    }
+
+    /**
+     * Retrieves the title of the shortest song from the song list.
+     *
+     * @return the title of the shortest song, or null if the list is empty
+     */
+    public String getTheShortestSong() {
+        return allSongs.stream()
+                .min(Comparator.comparingInt(song -> Integer.valueOf(song.getSongTime())))
+                .map(song -> song.getSongTitle() + " (duration: " + song.getSongTime() + " seconds)")
+                .orElse("No songs available");
+    }
+
+    /**
+     * Retrieves the title of the longest song from the song list.
+     *
+     * @return the title of the longest song, or null if the list is empty
+     */
+    public String getTheLongestSong() {
+        return allSongs.stream()
+                .max(Comparator.comparingInt(song -> Integer.valueOf(song.getSongTime())))
+                .map(song -> song.getSongTitle() + " (duration: " + song.getSongTime() + " seconds)")
+                .orElse("No songs available");
+    }
 }

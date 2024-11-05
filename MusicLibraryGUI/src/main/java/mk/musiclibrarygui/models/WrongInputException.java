@@ -5,7 +5,7 @@ package mk.musiclibrarygui.models;
  * input has been provided. It extends the Exception class.
  *
  * @author Michal Kaminski
- * @version 2.0
+ * @version 3.0
  */
 public class WrongInputException extends Exception {
 
