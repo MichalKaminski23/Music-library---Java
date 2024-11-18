@@ -79,7 +79,7 @@ public class Song {
      * @throws WrongInputException if the title is blank
      */
     public void setSongTitle(String songTitle) throws WrongInputException {
-        if (songTitle.isBlank()) {
+        if (songTitle == null || songTitle.isBlank()) {
             throw new WrongInputException("Song title can't be empty!");
         }
         this.songTitle = songTitle;

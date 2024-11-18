@@ -1,0 +1,4 @@
+--patch-module
+mk.musiclibrarygui=_
+--add-reads
+mk.musiclibrarygui=ALL-UNNAMED
