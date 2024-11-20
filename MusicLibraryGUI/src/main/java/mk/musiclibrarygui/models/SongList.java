@@ -15,7 +15,7 @@ import lombok.Data;
  * add, delete, and retrieve songs.
  *
  * @author Michal Kaminski
- * @version 3.0
+ * @version 4.0
  */
 @Data
 public class SongList {
@@ -56,7 +56,7 @@ public class SongList {
                 throw new WrongInputException("A song with this title already exists: " + songTitle);
             }
         }
-        if (!songRelease.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
+        if (!songRelease.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
             throw new WrongInputException("Invalid date format! Use dd.MM.yyyy!");
         }
         if (!songTime.matches("\\d+") || Integer.parseInt(songTime) <= 0) {

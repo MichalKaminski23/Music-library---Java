@@ -16,83 +16,163 @@ import org.junit.jupiter.params.provider.ValueSource;
  */
 public class SongTest {
 
-    private Song song;
+    private Song testSong;
 
     @BeforeEach
     public void setUp() {
-        song = new Song("Test title", "Test name", "Test surname", "Test album", "Test release", "Test duration");
-    }
-
-    @Test
-    public void testSetSongTitle() {
-        try {
-            song.setSongTitle("Kruci");
-            assertEquals(song.getSongTitle(), "Kruci", "Names are not the same");
-        } catch (WrongInputException e) {
-            fail("Comparing titles Kruci fails");
-        }
-
+        testSong = new Song("Test title", "Test name", "Test surname", "Test album", "Test release", "Test duration");
     }
 
     @ParameterizedTest
     @NullSource
     @EmptySource
     @ValueSource(strings = {" ", "\t", "\n"})
-    void testSetSongTitle(String text) {
+    void testSetSongTitleNullEmptyBlank(String text) {
         try {
-            song.setSongTitle(text);
+            testSong.setSongTitle(text);
             fail("Song title can't be empty");
         } catch (WrongInputException e) {
         }
     }
 
-    @Test
-    public void testSetAuthorName() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Nice song", "Very nice song"})
+    void testSetSongTitleProperlyValues(String text) {
         try {
-            song.setAuthorName("");
+            testSong.setSongTitle(text);
+        } catch (WrongInputException e) {
+            fail("Bad values");
+        }
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    @ValueSource(strings = {" ", "\t", "\n"})
+    public void testSetAuthorNameNullEmptyBlank(String text) {
+        try {
+            testSong.setAuthorName(text);
             fail("Author name can't be empty");
         } catch (WrongInputException e) {
         }
-
     }
 
-    @Test
-    public void testSetAuthorSurname() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Nice name", "Very nice name"})
+    public void testSetAuthorNameProperlyValues(String text) {
         try {
-            song.setAuthorSurname("");
+            testSong.setAuthorName(text);
+        } catch (WrongInputException e) {
+            fail("Bad values");
+        }
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    @ValueSource(strings = {" ", "\t", "\n"})
+    public void testSetAuthorSurnameNullEmptyBlank(String text) {
+        try {
+            testSong.setAuthorSurname(text);
             fail("Author surname can't be empty");
         } catch (WrongInputException e) {
         }
-
     }
 
-    @Test
-    public void testSetSongALbum() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Nice surname", "Very nice surname"})
+    public void testSetAuthorSurnameProperlyValues(String text) {
         try {
-            song.setSongAlbum("");
+            testSong.setAuthorSurname(text);
+        } catch (WrongInputException e) {
+            fail("Bad values");
+        }
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    @ValueSource(strings = {" ", "\t", "\n"})
+    public void testSetSongALbumNullEmptyBlank(String text) {
+        try {
+            testSong.setSongAlbum(text);
             fail("Song album can't be empty");
         } catch (WrongInputException e) {
         }
-
     }
 
-    @Test
-    public void testSetSongRelease() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Nice album", "Very nice album"})
+    public void testSetSongALbumProperlyValues(String text) {
         try {
-            song.setSongRelease("");
+            testSong.setSongAlbum(text);
+        } catch (WrongInputException e) {
+            fail("Bad values");
+        }
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    @ValueSource(strings = {" ", "\t", "\n"})
+    public void testSetSongReleaseNullEmptyBlank(String text) {
+        try {
+            testSong.setSongRelease(text);
             fail("Song release can't be empty");
         } catch (WrongInputException e) {
         }
-
     }
 
-    @Test
-    public void testSetSongTime() {
+    @ParameterizedTest
+    @ValueSource(strings = {"12.12.2003", "04.02.2006"})
+    public void testSetSongReleaseProperlyValues(String text) {
         try {
-            song.setSongTime("");
+            testSong.setSongRelease(text);
+        } catch (WrongInputException e) {
+            fail("Bad values");
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"00.00.0000", "55.13.2000", "12.12.0000", "01.07.3333"})
+    public void testSetSongReleaseNotProperlyValues(String text) {
+        try {
+            testSong.setSongTime(text);
+            assertTrue(!text.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}"), "Not properly date (dd.MM.yyyy)");
+        } catch (WrongInputException e) {
+        }
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @EmptySource
+    @ValueSource(strings = {" ", "\t", "\n"})
+    public void testSetSongTimeNullEmptyBlank(String text) {
+        try {
+            testSong.setSongTime(text);
             fail("Song time can't be empty");
         } catch (WrongInputException e) {
         }
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"333", "666"})
+    public void testSetSongTimeProperlyValues(String text) {
+        try {
+            testSong.setSongTime(text);
+            assertEquals(text, testSong.getSongTime());
+        } catch (WrongInputException e) {
+            fail("Song time can't be a negative digit");
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"x", "yy", "-1", "0"})
+    public void testSetSongTimeNotProperlyValues(String text) {
+        try {
+            testSong.setSongTime(text);
+            assertTrue(!text.matches("\\d+"), "Song time should only contain digits");
+        } catch (WrongInputException e) {
+        }
     }
 }
