@@ -51,22 +51,16 @@ public class SongList {
      * @throws WrongInputException if any input is invalid
      */
     public void addSong(String songTitle, String authorName, String authorSurname, String songAlbum, String songRelease, String songTime, SongTitleChecker titleChecker) throws WrongInputException {
-        for (Song song : allSongs) {
-            if (titleChecker.checkTitle(song.getSongTitle(), songTitle)) {
-                throw new WrongInputException("A song with this title already exists: " + songTitle);
-            }
-        }
-        if (!songRelease.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
+        if (songTitle == null || songTitle.isBlank() || authorName == null || authorName.isBlank()
+                || authorSurname == null || authorSurname.isBlank() || songAlbum == null || songAlbum.isBlank()
+                || songRelease == null || songRelease.isBlank() || songTime == null || songTime.isBlank()) {
+            throw new WrongInputException("Text fields can't be empty!");
+        } else if (!songRelease.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
             throw new WrongInputException("Invalid date format! Use dd.MM.yyyy!");
-        }
-        if (!songTime.matches("\\d+") || Integer.parseInt(songTime) <= 0) {
+        } else if (!songTime.matches("\\d+") || Integer.parseInt(songTime) <= 0) {
             throw new WrongInputException("Invalid time format! Use only positive numbers!");
         }
-        if (songTitle.isBlank() || authorName.isBlank()
-                || authorSurname.isBlank() || songAlbum.isBlank()
-                || songRelease.isBlank() || songTime.isBlank()) {
-            throw new WrongInputException("Text fields can't be empty!");
-        }
+        compareSongTitles(songTitle, titleChecker);
         this.allSongs.add(new Song(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime));
     }
 
@@ -95,12 +89,8 @@ public class SongList {
      *
      * @param index The index of the song to retrieve
      * @return The Song object at the specified index
-     * @throws WrongInputException if the index is out of bounds
      */
-    public Song getOneByIndex(int index) throws WrongInputException {
-        if (index < 0 || index >= allSongs.size()) {
-            throw new WrongInputException("Index out of bounds: " + index);
-        }
+    public Song getOneByIndex(int index) {
         return allSongs.get(index);
     }
 

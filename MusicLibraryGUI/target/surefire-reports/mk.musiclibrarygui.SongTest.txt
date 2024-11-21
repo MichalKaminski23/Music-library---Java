@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: mk.musiclibrarygui.SongTest
 -------------------------------------------------------------------------------
-Tests run: 50, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.287 s -- in mk.musiclibrarygui.SongTest
+Tests run: 54, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s -- in mk.musiclibrarygui.SongTest
