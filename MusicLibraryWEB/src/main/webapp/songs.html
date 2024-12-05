@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <script src="js/songs.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body onload="getAllSongsTable('tableSong')">
+        <h1>Your music library!</h1>
+        <div id="errorInfo" class="errorInfo">&nbsp;</div>
+        <hr/>
+        <input type="text" id="songTitle" name="songTitle" placeholder="Song title"/>
+        <input type="text" id="authorName" name="authorName" placeholder="Author name"/>
+        <input type="text" id="authorSurname" name="authorSurname" placeholder="Author surname"/>
+        <input type="text" id="songAlbum" name="songAlbum" placeholder="Song album"/>
+        <input type="text" id="songRelease" name="songRelease" placeholder="Release date"/>
+        <input type="text" id="songTime" name="songTime" placeholder="Song time"/>
+        <input type="button" id="Insert" value="Add" onClick="addNewSong('songTitle','authorName','authorSurname','songAlbum','songRelease','songTime', 'tableSong','errorInfo');" />
+        <hr/>
+        <table>
+            <thead>                
+                <tr>
+                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Album</th>
+                    <th>Release</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>            
+            <tbody id="tableSong">
+            </tbody>            
+        </table>
+    </body>
+</html>

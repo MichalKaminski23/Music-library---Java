@@ -1,0 +1,10 @@
+mk\musiclibraryweb\models\SingletonModel.class
+mk\musiclibraryweb\models\SongTitleChecker.class
+mk\musiclibraryweb\servlets\SongServlet.class
+mk\musiclibraryweb\models\Song.class
+mk\musiclibraryweb\models\SongList.class
+mk\musiclibraryweb\servlets\SongDeleteServlet.class
+mk\musiclibraryweb\servlets\SongInsertServlet.class
+mk\musiclibraryweb\models\WrongInputException.class
+mk\musiclibraryweb\servlets\SongUpdateServlet.class
+mk\musiclibraryweb\models\package-info.class
