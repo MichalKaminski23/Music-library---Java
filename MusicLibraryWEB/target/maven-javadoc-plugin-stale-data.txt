@@ -1,0 +1,79 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/placu/.m2/repository/jakarta/platform/jakarta.jakartaee-web-api/10.0.0/jakarta.jakartaee-web-api-10.0.0.jar;C:/Users/placu/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar;C:/Users/placu/.m2/repository/jakarta/servlet/jsp/jakarta.servlet.jsp-api/3.1.0/jakarta.servlet.jsp-api-3.1.0.jar;C:/Users/placu/.m2/repository/jakarta/el/jakarta.el-api/5.0.1/jakarta.el-api-5.0.1.jar;C:/Users/placu/.m2/repository/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar;C:/Users/placu/.m2/repository/jakarta/faces/jakarta.faces-api/4.0.1/jakarta.faces-api-4.0.1.jar;C:/Users/placu/.m2/repository/jakarta/ws/rs/jakarta.ws.rs-api/3.1.0/jakarta.ws.rs-api-3.1.0.jar;C:/Users/placu/.m2/repository/jakarta/websocket/jakarta.websocket-api/2.1.0/jakarta.websocket-api-2.1.0.jar;C:/Users/placu/.m2/repository/jakarta/websocket/jakarta.websocket-client-api/2.1.0/jakarta.websocket-client-api-2.1.0.jar;C:/Users/placu/.m2/repository/jakarta/json/jakarta.json-api/2.1.0/jakarta.json-api-2.1.0.jar;C:/Users/placu/.m2/repository/jakarta/json/bind/jakarta.json.bind-api/3.0.0/jakarta.json.bind-api-3.0.0.jar;C:/Users/placu/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar;C:/Users/placu/.m2/repository/jakarta/ejb/jakarta.ejb-api/4.0.1/jakarta.ejb-api-4.0.1.jar;C:/Users/placu/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar;C:/Users/placu/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar;C:/Users/placu/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar;C:/Users/placu/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.1.0/jakarta.interceptor-api-2.1.0.jar;C:/Users/placu/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.0.1/jakarta.enterprise.cdi-api-4.0.1.jar;C:/Users/placu/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.0.1/jakarta.enterprise.lang-model-4.0.1.jar;C:/Users/placu/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar;C:/Users/placu/.m2/repository/jakarta/authentication/jakarta.authentication-api/3.0.0/jakarta.authentication-api-3.0.0.jar;C:/Users/placu/.m2/repository/jakarta/security/enterprise/jakarta.security.enterprise-api/3.0.0/jakarta.security.enterprise-api-3.0.0.jar;C:/Users/placu/.m2/repository/jakarta/xml/ws/jakarta.xml.ws-api/4.0.0/jakarta.xml.ws-api-4.0.0.jar;C:/Users/placu/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.0/jakarta.xml.bind-api-4.0.0.jar;C:/Users/placu/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar;C:/Users/placu/.m2/repository/jakarta/xml/soap/jakarta.xml.soap-api/3.0.0/jakarta.xml.soap-api-3.0.0.jar;C:/Users/placu/.m2/repository/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/placu/Music-library---Java/MusicLibraryWEB/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/placu/Music-library---Java/MusicLibraryWEB/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'MusicLibraryWEB 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'MusicLibraryWEB 1.0-SNAPSHOT API'
+mk.musiclibraryweb.models
+mk.musiclibraryweb.servlets
+C:\Users\placu\.m2\repository\jakarta\platform\jakarta.jakartaee-web-api\10.0.0\jakarta.jakartaee-web-api-10.0.0.jar = 1733144003341
+C:\Users\placu\.m2\repository\jakarta\servlet\jakarta.servlet-api\6.0.0\jakarta.servlet-api-6.0.0.jar = 1733144003218
+C:\Users\placu\.m2\repository\jakarta\servlet\jsp\jakarta.servlet.jsp-api\3.1.0\jakarta.servlet.jsp-api-3.1.0.jar = 1733144003110
+C:\Users\placu\.m2\repository\jakarta\el\jakarta.el-api\5.0.1\jakarta.el-api-5.0.1.jar = 1733144002935
+C:\Users\placu\.m2\repository\jakarta\servlet\jsp\jstl\jakarta.servlet.jsp.jstl-api\3.0.0\jakarta.servlet.jsp.jstl-api-3.0.0.jar = 1733144003106
+C:\Users\placu\.m2\repository\jakarta\faces\jakarta.faces-api\4.0.1\jakarta.faces-api-4.0.1.jar = 1733144003073
+C:\Users\placu\.m2\repository\jakarta\ws\rs\jakarta.ws.rs-api\3.1.0\jakarta.ws.rs-api-3.1.0.jar = 1733144003141
+C:\Users\placu\.m2\repository\jakarta\websocket\jakarta.websocket-api\2.1.0\jakarta.websocket-api-2.1.0.jar = 1733144003160
+C:\Users\placu\.m2\repository\jakarta\websocket\jakarta.websocket-client-api\2.1.0\jakarta.websocket-client-api-2.1.0.jar = 1733144003173
+C:\Users\placu\.m2\repository\jakarta\json\jakarta.json-api\2.1.0\jakarta.json-api-2.1.0.jar = 1733144003211
+C:\Users\placu\.m2\repository\jakarta\json\bind\jakarta.json.bind-api\3.0.0\jakarta.json.bind-api-3.0.0.jar = 1733144003235
+C:\Users\placu\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar = 1733144003244
+C:\Users\placu\.m2\repository\jakarta\ejb\jakarta.ejb-api\4.0.1\jakarta.ejb-api-4.0.1.jar = 1733144003284
+C:\Users\placu\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar = 1733144003291
+C:\Users\placu\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar = 1733144003370
+C:\Users\placu\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar = 1733144003365
+C:\Users\placu\.m2\repository\jakarta\interceptor\jakarta.interceptor-api\2.1.0\jakarta.interceptor-api-2.1.0.jar = 1733144003345
+C:\Users\placu\.m2\repository\jakarta\enterprise\jakarta.enterprise.cdi-api\4.0.1\jakarta.enterprise.cdi-api-4.0.1.jar = 1733144003370
+C:\Users\placu\.m2\repository\jakarta\enterprise\jakarta.enterprise.lang-model\4.0.1\jakarta.enterprise.lang-model-4.0.1.jar = 1733144003396
+C:\Users\placu\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar = 1733144003401
+C:\Users\placu\.m2\repository\jakarta\authentication\jakarta.authentication-api\3.0.0\jakarta.authentication-api-3.0.0.jar = 1733144003416
+C:\Users\placu\.m2\repository\jakarta\security\enterprise\jakarta.security.enterprise-api\3.0.0\jakarta.security.enterprise-api-3.0.0.jar = 1733144003432
+C:\Users\placu\.m2\repository\jakarta\xml\ws\jakarta.xml.ws-api\4.0.0\jakarta.xml.ws-api-4.0.0.jar = 1733154624290
+C:\Users\placu\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar = 1733154624619
+C:\Users\placu\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar = 1733144003445
+C:\Users\placu\.m2\repository\jakarta\xml\soap\jakarta.xml.soap-api\3.0.0\jakarta.xml.soap-api-3.0.0.jar = 1733154624399
+C:\Users\placu\.m2\repository\org\projectlombok\lombok\1.18.34\lombok-1.18.34.jar = 1730734646631
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\src\main\java = 1733392152218
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\allclasses-index.html = 1733938964490
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\allpackages-index.html = 1733938964495
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\copy.svg = 1733938964555
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\element-list = 1733938964313
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\help-doc.html = 1733938964546
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\index-all.html = 1733938964532
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\index.html = 1733938964464
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\link.svg = 1733938964577
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\member-search-index.js = 1733938964503
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\module-search-index.js = 1733938964497
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\overview-summary.html = 1733938964539
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\overview-tree.html = 1733938964458
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\package-search-index.js = 1733938964499
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\script.js = 1733938964552
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\search-page.js = 1733938964583
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\search.html = 1733938964536
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\search.js = 1733938964581
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\serialized-form.html = 1733938964377
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\stylesheet.css = 1733938964550
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\tag-search-index.js = 1733938964504
+C:\Users\placu\Music-library---Java\MusicLibraryWEB\target\reports\apidocs\type-search-index.js = 1733938964500

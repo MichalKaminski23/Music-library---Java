@@ -7,7 +7,7 @@ import lombok.Data;
  * title, composer, album, release date, and duration.
  *
  * @author Michal Kaminski
- * @version 4.0
+ * @version 5.0
  */
 @Data
 public class Song {
@@ -156,6 +156,21 @@ public class Song {
             throw new WrongInputException("Song time must be greater than 0!");
         }
         this.songTime = songTime;
+    }
+
+    /**
+     * Updates the properties of the current song with the values from the given
+     * song.
+     *
+     * @param song the Song object containing the updated values
+     */
+    public void update(Song song) {
+        songTitle = song.songTitle;
+        authorName = song.authorName;
+        authorSurname = song.authorSurname;
+        songAlbum = song.songAlbum;
+        songRelease = song.songRelease;
+        songTime = song.songTime;
     }
 
 }

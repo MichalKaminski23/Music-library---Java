@@ -10,9 +10,28 @@ import java.io.PrintWriter;
 import mk.musiclibraryweb.models.SingletonModel;
 import mk.musiclibraryweb.models.WrongInputException;
 
+/**
+ * Servlet responsible for handling the insertion of new songs into the music library.
+ * It retrieves the song details from the request and adds the new song to the model.
+ * If there is an error in the input, it returns a bad request response.
+ * 
+ * @author Michal Kaminski
+ * @version 5.0
+ */
 @WebServlet("/songInsert")
 public class SongInsertServlet extends HttpServlet {
 
+    /**
+     * Processes the HTTP request to insert a new song into the music library.
+     * It reads the song details from the request parameters, and attempts to add the song.
+     * If the input is valid, the song is added, and the user is redirected to the songs list.
+     * If there is an error in the input, an exception is thrown and the error message is returned.
+     * 
+     * @param request the HttpServletRequest object containing the request details
+     * @param response the HttpServletResponse object used to send the response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -38,6 +57,7 @@ public class SongInsertServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
+     * This method is invoked when a GET request is received by the servlet.
      *
      * @param request servlet request
      * @param response servlet response
@@ -52,6 +72,7 @@ public class SongInsertServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
+     * This method is invoked when a POST request is received by the servlet.
      *
      * @param request servlet request
      * @param response servlet response
@@ -66,12 +87,14 @@ public class SongInsertServlet extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.
+     * This method provides a brief description of the servlet.
      *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet for inserting new songs into the music library.";
+    }
+    // </editor-fold>
 
 }

@@ -1,11 +1,27 @@
 body {
     background-color: lightgreen;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: all 0.3s ease;
 }
 
 table, td, th, tr {
     border-collapse: collapse;
-    border: 1px black solid;
-    padding: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    font-size: 14px;
+}
+
+table {
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
 .center {
@@ -13,8 +29,62 @@ table, td, th, tr {
     vertical-align: middle;
 }
 
-.errorInfo{
+.errorInfo {
     color: red;
-    font-size: 20pt;
+    font-size: 24pt;
     text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: darkgreen;
+    font-size: 36pt;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+    font-size: 16pt;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+    color: darkblue;
+    transform: scale(1.1);
+}
+
+p {
+    margin: 10px 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body, h1, p, a, .errorInfo {
+    animation: fadeIn 1s ease-in-out;
+}
+
+button {
+    background-color: yellow;
+}
+
+body.pink {
+    background-color: pink;
+    color: white;
 }

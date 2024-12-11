@@ -1,12 +1,28 @@
 package mk.musiclibraryweb.models;
 
+/**
+ * SingletonModel is a class that implements the Singleton design pattern for managing a single instance of SongList.
+ * It ensures that there is only one instance of SongList throughout the application.
+ * The instance is initialized with some sample songs if it doesn't already exist.
+ * 
+ * @author Michal Kaminski
+ * @version 5.0
+ */
 public class SingletonModel {
 
+    // The single instance of SongList.
     private static SongList instance;
 
+    // Private constructor to prevent instantiation from outside.
     private SingletonModel() {
     }
 
+    /**
+     * Retrieves the single instance of the SongList. If the instance doesn't exist yet,
+     * it will be created and initialized with sample songs.
+     *
+     * @return the instance of SongList.
+     */
     public static SongList getInstance() {
 
         if (instance == null) {
