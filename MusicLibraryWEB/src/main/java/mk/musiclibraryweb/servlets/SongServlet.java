@@ -11,10 +11,10 @@ import mk.musiclibraryweb.models.SingletonModel;
 import mk.musiclibraryweb.models.Song;
 
 /**
- * Servlet responsible for handling the song management operations.
- * It retrieves a list of songs from the model and displays them in a table.
- * It also provides functionality for searching, updating, and deleting songs.
- * 
+ * Servlet responsible for handling the song management operations. It retrieves
+ * a list of songs from the model and displays them in a table. It also provides
+ * functionality for searching, updating, and deleting songs.
+ *
  * @author Michal Kaminski
  * @version 5.0
  */
@@ -22,18 +22,20 @@ import mk.musiclibraryweb.models.Song;
 public class SongServlet extends HttpServlet {
 
     /**
-     * Initializes the servlet. This method is called once when the servlet is first created.
+     * Initializes the servlet. This method is called once when the servlet is
+     * first created.
      */
     @Override
     public void init() {
     }
 
     /**
-     * Processes the HTTP request and generates the HTML response.
-     * This method retrieves the song title search parameter, displays the list of songs,
+     * Processes the HTTP request and generates the HTML response. This method
+     * retrieves the song title search parameter, displays the list of songs,
      * and provides input fields for updating and deleting songs.
-     * 
-     * @param request the HttpServletRequest object containing the request details
+     *
+     * @param request the HttpServletRequest object containing the request
+     * details
      * @param response the HttpServletResponse object used to send the response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
@@ -52,26 +54,26 @@ public class SongServlet extends HttpServlet {
             if (showAll || song.getSongTitle().contains(songTitle)) {
                 out.println("<tr>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"songTitle\" name=\"songTitle\" placeholder=\"Song title\" value=\"" + song.getSongTitle() + "\"/>");
+                out.println("<input type=\"text\" id=\"songTitle\" name=\"songTitle\" placeholder=\"Song title\" value=\"" + song.getSongTitle() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"authorName\" name=\"authorName\" placeholder=\"Author name\" value=\"" + song.getAuthorName() + "\"/>");
+                out.println("<input type=\"text\" id=\"authorName\" name=\"authorName\" placeholder=\"Author name\" value=\"" + song.getAuthorName() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"authorSurname\" name=\"authorSurname\" placeholder=\"Author surname\" value=\"" + song.getAuthorSurname() + "\"/>");
+                out.println("<input type=\"text\" id=\"authorSurname\" name=\"authorSurname\" placeholder=\"Author surname\" value=\"" + song.getAuthorSurname() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"songAlbum\" name=\"songAlbum\" placeholder=\"Song album\" value=\"" + song.getSongAlbum() + "\"/>");
+                out.println("<input type=\"text\" id=\"songAlbum\" name=\"songAlbum\" placeholder=\"Song album\" value=\"" + song.getSongAlbum() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"songRelease\" name=\"songRelease\" placeholder=\"Release date\" value=\"" + song.getSongRelease() + "\"/>");
+                out.println("<input type=\"text\" id=\"songRelease\" name=\"songRelease\" placeholder=\"Release date\" value=\"" + song.getSongRelease() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"songTime\" name=\"songTime\" placeholder=\"Song time\" value=\"" + song.getSongTime() + "\"/>");
+                out.println("<input type=\"text\" id=\"songTime\" name=\"songTime\" placeholder=\"Song time\" value=\"" + song.getSongTime() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
                 out.println("<input type=\"button\" value=\"Update\" onclick=\"updateSong(" + song.getSongID() + ",'songTitle','authorName','authorSurname','songAlbum','songRelease','songTime','tableSong','errorInfo');\" />");
-                out.println("</td>");                                                                                                                                                                   
+                out.println("</td>");
                 out.println("<td>");
                 out.println("<input type=\"button\" value=\"Delete\" onclick=\"deleteSong(" + song.getSongID() + ", 'tableSong','errorInfo');\" />");
                 out.println("</td>");
@@ -82,8 +84,8 @@ public class SongServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
-     * This method is invoked when a GET request is received by the servlet.
+     * Handles the HTTP <code>GET</code> method. This method is invoked when a
+     * GET request is received by the servlet.
      *
      * @param request servlet request
      * @param response servlet response
@@ -97,8 +99,8 @@ public class SongServlet extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     * This method is invoked when a POST request is received by the servlet.
+     * Handles the HTTP <code>POST</code> method. This method is invoked when a
+     * POST request is received by the servlet.
      *
      * @param request servlet request
      * @param response servlet response
@@ -112,8 +114,8 @@ public class SongServlet extends HttpServlet {
     }
 
     /**
-     * Returns a short description of the servlet.
-     * This method provides a brief description of the servlet.
+     * Returns a short description of the servlet. This method provides a brief
+     * description of the servlet.
      *
      * @return a String containing servlet description
      */

@@ -1,4 +1,5 @@
 mk\musiclibraryweb\models\SingletonModel.class
+mk\musiclibraryweb\servlets\package-info.class
 mk\musiclibraryweb\models\SongTitleChecker.class
 mk\musiclibraryweb\servlets\SongServlet.class
 mk\musiclibraryweb\models\Song.class
