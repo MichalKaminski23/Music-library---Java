@@ -3,42 +3,15 @@
     <head>
         <title>Start Page</title>
         <link rel="stylesheet" href="css/main.css">
+        <script src="js/songs.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-            function getCookie(name) {
-                let nameEQ = name + "=";
-                let ca = document.cookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) === ' ')
-                        c = c.substring(1, c.length);
-                    if (c.indexOf(nameEQ) === 0)
-                        return c.substring(nameEQ.length, c.length);
-                }
-                return null;
-            }
-
-            function setCookie(name, value, days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                let expires = "expires=" + date.toUTCString();
-                document.cookie = name + "=" + value + ";" + expires + ";path=/";
-            }
-
-            function setTheme(theme) {
-                document.body.className = theme;
-                setCookie("theme", theme, 7);
-            }
-
-            window.onload = function () {
-                let theme = getCookie("theme") || "green";
-                setTheme(theme);
-            };
-        </script>
     </head>
     <body>
-        <h1>Hello my friend!</h1>        
+        <h1>Hello my friend!</h1> 
+        <div id="themeInfo" style="display:none; padding: 10px; background-color: #f0f0f0; border: 1px solid #ccc;">
+            The theme has been loaded from cookies!
+        </div>
         <p><a href="songs.html">Your music libary</a></p>
         <p><a href="author.html">About the author</a></p>
         <button onclick="setTheme('green')">Green Mode</button>

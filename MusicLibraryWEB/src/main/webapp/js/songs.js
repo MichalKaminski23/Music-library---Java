@@ -147,6 +147,17 @@ function setCookie(name, value, days) {
 }
 
 /**
+ * Loads the theme from the cookie and displays a message if it was loaded from the cookie.
+ */
+function loadThemeFromCookie() {
+    const theme = getCookie("theme") || "green";
+    if (theme) {
+        document.body.className = theme;
+        document.getElementById("themeInfo").style.display = "block";
+    }
+}
+
+/**
  * Sets the theme for the page and stores the selected theme in a cookie.
  * 
  * @param {string} theme The theme to apply to the page.
@@ -154,6 +165,7 @@ function setCookie(name, value, days) {
 function setTheme(theme) {
     document.body.className = theme;
     setCookie("theme", theme, 7);
+    document.getElementById("themeInfo").style.display = "none";
 }
 
 /**
@@ -162,8 +174,6 @@ function setTheme(theme) {
  * sets the theme on the page, and then loads the songs table by calling the getAllSongsTable function.
  */
 window.onload = function () {
-    let theme = getCookie("theme") || "green";
-    setTheme(theme);
-   
     getAllSongsTable('tableSong');
+    loadThemeFromCookie();
 };

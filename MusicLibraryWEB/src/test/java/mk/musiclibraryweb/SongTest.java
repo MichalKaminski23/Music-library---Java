@@ -6,6 +6,7 @@ import mk.musiclibraryweb.models.WrongInputException;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
@@ -17,7 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
  * such as handling of null, empty, and valid inputs.
  *
  * @author Michal Kaminski
- * @version 4.0
+ * @version 5.0
  */
 public class SongTest {
 
@@ -299,6 +300,46 @@ public class SongTest {
         } catch (WrongInputException e) {
         }
     }
-    
-    //update testy zrobić
+
+    /**
+     * Tests update(song) using different data sets.
+     *
+     * @param IndividualSong initial state of the Song object
+     * @param updateSong Song object with specified values
+     * @param expectedSong expected state of update
+     */
+    @ParameterizedTest
+    @MethodSource("provideSongsForTestSongUpdate")
+    void testSongUpdate(Song initialSong, Song updatedSong, Song expectedSong) {
+        initialSong.update(updatedSong);
+
+        assertEquals(expectedSong.getSongTitle(), initialSong.getSongTitle());
+        assertEquals(expectedSong.getAuthorName(), initialSong.getAuthorName());
+        assertEquals(expectedSong.getAuthorSurname(), initialSong.getAuthorSurname());
+        assertEquals(expectedSong.getSongAlbum(), initialSong.getSongAlbum());
+        assertEquals(expectedSong.getSongRelease(), initialSong.getSongRelease());
+        assertEquals(expectedSong.getSongTime(), initialSong.getSongTime());
+    }
+
+    /**
+     * Provides a stream of {@link Song} objects, for parameterized tests.
+     *
+     * @return a stream of {@link Song} instances
+     */
+    static Stream<Arguments> provideSongsForTestSongUpdate() {
+        return Stream.of(
+                // initialSong, updatedSong, expectedSong
+                 Arguments.of(
+                        new Song("Title1", "Author1", "Surname1", "Album1", "01.01.2000", "3:30"),
+                        new Song("Title2", "Author2", "Surname2", "Album2", "02.02.2002", "4:00"),
+                        new Song("Title2", "Author2", "Surname2", "Album2", "02.02.2002", "4:00")
+                ),
+                 Arguments.of(
+                        new Song("Kiemon", "Jacek", "Muran", "RockAlbum", "10.10.2010", "5:15"),
+                        new Song("Baxton", "Michal", "Baron", "Masno", "12.12.2012", "3:45"),
+                        new Song("Baxton", "Michal", "Baron", "Masno", "12.12.2012", "3:45")
+                )
+        );
+    }
+
 }
