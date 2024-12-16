@@ -13,7 +13,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import mk.musiclibraryweb.models.SingletonModel;
 
 /**
  * Tests for the {@link SongList} class, verifying correctness and exception
@@ -150,39 +149,22 @@ public class SongListTest {
         }
     }
 
-//    /**
-//     * Tests comparing song titles with proper values.
-//     *
-//     * @param text the song title to compare.
-//     */
-//    @ParameterizedTest
-//    @ValueSource(strings = {"Example title 1", "Example title 2"})
-//    public void testCompareSongTitlesProperlyValues(String text) {
-//        try {
-//            SingletonModel.getInstance().compareSongTitles(text, titleChecker);
-//            assertEquals(SingletonModel.getInstance().getOneByIndex(0).getSongTitle(), text);
-//            assertEquals(SingletonModel.getInstance().getOneByIndex(1).getSongTitle(), text);
-//            fail("Exception should not be thrown for valid input values");
-//        } catch (WrongInputException e) {
-//        }
-//    }
-//
-//    /**
-//     * Tests comparing song titles with not proper values.
-//     *
-//     * @param text the song title to compare.
-//     */
-//    @ParameterizedTest
-//    @ValueSource(strings = {"Not title 1", "Not title 2"})
-//    public void testCompareSongTitlesNotProperlyValues(String text) {
-//        try {
-//            SingletonModel.getInstance().compareSongTitles(text, titleChecker);
-//            assertTrue(!text.matches(SingletonModel.getInstance().getOneByIndex(0).getSongTitle()));
-//            assertTrue(!text.matches(SingletonModel.getInstance().getOneByIndex(1).getSongTitle()));
-//        } catch (WrongInputException e) {
-//            fail("Exception should be thrown for invalid input values");
-//        }
-//    }
+    /**
+     * Tests comparing song titles with proper values.
+     *
+     * @param text the song title to compare.
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"Title 1", "Title 2"})
+    public void testCompareSongTitlesProperlyValues(String text) {
+        try {
+            songList.compareSongTitles(text, titleChecker);
+            assertEquals(songList.getOneByIndex(0).getSongTitle(), text);
+            assertEquals(songList.getOneByIndex(1).getSongTitle(), text);
+            fail("Exception should not be thrown for valid input values");
+        } catch (WrongInputException e) {
+        }
+    }
 
     /**
      * Tests deleting a song by valid index.
@@ -203,9 +185,7 @@ public class SongListTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 1000000})
     public void testDeleteOneByIndexNotProperlyValues(int testIndex) {
-
         songList.deleteOneByIndex(testIndex);
-
     }
 
 }

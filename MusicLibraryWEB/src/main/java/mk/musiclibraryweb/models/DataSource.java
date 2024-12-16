@@ -6,9 +6,9 @@ public interface DataSource {
 
     public List<Song> getAllSongs();
 
-    public void persistObject(Object object);
+    public void persistObject(Object object) throws WrongInputException;
 
-    public boolean update(Song song);
+    public boolean update(Song song) throws WrongInputException;
 
     public boolean delete(int songID);
 

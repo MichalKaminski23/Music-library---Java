@@ -45,20 +45,6 @@ public class DataBaseSource implements DataSource {
         return new ArrayList<>();
     }
 
-    public List<Song> finfNySongTitle(String songTitle) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            Query query = em.createQuery("SELECT s FROM Song s where s.songTitle=:songTitle").setParameter("songTitle", songTitle);
-            return query.getResultList();
-        } catch (PersistenceException e) {
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-        return new ArrayList<>();
-    }
-
     @Override
     public boolean update(Song song) {
         try (EntityManager em = emf.createEntityManager()) {

@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import mk.musiclibraryweb.models.DataBaseSource;
-import mk.musiclibraryweb.models.SingletonModel;
 import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.WrongInputException;
 import mk.musiclibraryweb.models.DataSource;
@@ -45,8 +44,7 @@ public class SongUpdateServlet extends HttpServlet {
         ServletContext context = request.getServletContext();
         DataSource dataSource = (DataSource)context.getAttribute("DataSource");
 
-        //try {
-            int songID = Integer.parseInt(request.getParameter("songID"));
+        try {
             String songTitle = request.getParameter("songTitle");
             String authorName = request.getParameter("authorName");
             String authorSurname = request.getParameter("authorSurname");
@@ -57,10 +55,10 @@ public class SongUpdateServlet extends HttpServlet {
             dataSource.update(new Song(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime));
 
             response.sendRedirect(request.getContextPath() + "/songs");
-//        } catch (WrongInputException ex) {
-//            out.println(ex.toString());
-//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//        }
+        } catch (WrongInputException ex) {
+            out.println(ex.toString());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
     }
 

@@ -1,7 +1,6 @@
 mk\musiclibraryweb\models\Song.class
 mk\musiclibraryweb\servlets\SongInsertServlet.class
 mk\musiclibraryweb\models\package-info.class
-mk\musiclibraryweb\models\SingletonModel.class
 mk\musiclibraryweb\servlets\package-info.class
 mk\musiclibraryweb\models\SongTitleChecker.class
 mk\musiclibraryweb\servlets\SongServlet.class

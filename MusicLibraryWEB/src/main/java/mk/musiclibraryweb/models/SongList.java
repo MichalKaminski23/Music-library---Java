@@ -39,19 +39,27 @@ public class SongList implements DataSource {
     }
 
     @Override
-    public void persistObject(Object object) {
-        if(object instanceof Song song) allSongs.add(song);
+    public void persistObject(Object object) throws WrongInputException{
+        if(object instanceof Song song) {
+            allSongs.add(song);
+            // addSong(song.getSongTitle(), song.getAuthorName(), song.getAuthorSurname(), song.getSongAlbum(), song.getSongRelease(), song.getSongTime());
+
+        }
+        else{
+            throw new WrongInputException("Invalid object!");
+        }
     }
 
     @Override
-    public boolean update(Song song) {
+    public boolean update(Song song) throws WrongInputException {
         for(int i = 0; i < allSongs.size(); ++i) {
             if(allSongs.get(i).getSongID() == song.getSongID()) {
                 allSongs.set(i, song);
                 return true;
             }
-        }        
-        return false;
+        }
+        throw new WrongInputException("Bad song ID!");        
+        //return false;
     }
 
     /**
@@ -164,28 +172,29 @@ public class SongList implements DataSource {
      * format "dd.MM.yyyy", - the song time is not a positive number, - a song
      * with the same title already exists (excluding the current song).
      */
-    public boolean updateSong(int songID, Song song) throws WrongInputException {
-        var s = allSongs.stream().filter(i -> i.getSongID() == songID).findFirst();
-        if (song.getSongTitle() == null || song.getSongTitle().isBlank() || song.getAuthorName() == null || song.getAuthorName().isBlank()
-                || song.getAuthorSurname() == null || song.getAuthorSurname().isBlank() || song.getSongAlbum() == null || song.getSongAlbum().isBlank()
-                || song.getSongRelease() == null || song.getSongRelease().isBlank() || song.getSongTime() == null || song.getSongTime().isBlank()) {
-            throw new WrongInputException("Text fields can't be empty!");
-        } else if (!song.getSongRelease().matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
-            throw new WrongInputException("Invalid date format! Use dd.MM.yyyy!");
-        } else if (!song.getSongTime().matches("\\d+") || Integer.parseInt(song.getSongTime()) <= 0) {
-            throw new WrongInputException("Invalid time format! Use only positive numbers!");
-        }
-
-        for (int i = 0; i < allSongs.size(); i++) {
-            if (i != songID && titleChecker.checkTitle(allSongs.get(i).getSongTitle(), song.getSongTitle())) {
-                throw new WrongInputException("A song with this title already exists: " + song.getSongTitle());
-            }
-        }
-
-        if (s.isPresent()) {
-            s.get().update(song);
-        }
-
-        return s.isPresent();
-    }
+//    @Override
+//    public boolean updateSong(int songID, Song song) throws WrongInputException {
+//        var s = allSongs.stream().filter(i -> i.getSongID() == songID).findFirst();
+//        if (song.getSongTitle() == null || song.getSongTitle().isBlank() || song.getAuthorName() == null || song.getAuthorName().isBlank()
+//                || song.getAuthorSurname() == null || song.getAuthorSurname().isBlank() || song.getSongAlbum() == null || song.getSongAlbum().isBlank()
+//                || song.getSongRelease() == null || song.getSongRelease().isBlank() || song.getSongTime() == null || song.getSongTime().isBlank()) {
+//            throw new WrongInputException("Text fields can't be empty!");
+//        } else if (!song.getSongRelease().matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
+//            throw new WrongInputException("Invalid date format! Use dd.MM.yyyy!");
+//        } else if (!song.getSongTime().matches("\\d+") || Integer.parseInt(song.getSongTime()) <= 0) {
+//            throw new WrongInputException("Invalid time format! Use only positive numbers!");
+//        }
+//
+//        for (int i = 0; i < allSongs.size(); i++) {
+//            if (i != songID && titleChecker.checkTitle(allSongs.get(i).getSongTitle(), song.getSongTitle())) {
+//                throw new WrongInputException("A song with this title already exists: " + song.getSongTitle());
+//            }
+//        }
+//
+//        if (s.isPresent()) {
+//            s.get().update(song);
+//        }
+//
+//        return s.isPresent();
+//    }
 }
