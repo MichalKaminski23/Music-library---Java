@@ -113,60 +113,60 @@ function deleteSong(songID, tableID, errorInfo) {
     xhttp.send();
 }
 
-/**
- * Retrieves the value of a specified cookie.
- * 
- * @param {string} name The name of the cookie to retrieve.
- * @returns {string|null} The value of the cookie, or null if not found.
- */
-function getCookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ')
-            c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0)
-            return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-/**
- * Sets a cookie with a specified name, value, and expiration time.
- * 
- * @param {string} name The name of the cookie to set.
- * @param {string} value The value to store in the cookie.
- * @param {number} days The number of days the cookie should be valid.
- */
-function setCookie(name, value, days) {
-    let date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-/**
- * Loads the theme from the cookie and displays a message if it was loaded from the cookie.
- */
-function loadThemeFromCookie() {
-    const theme = getCookie("theme") || "green";
-    if (theme) {
-        document.body.className = theme;
-        document.getElementById("themeInfo").style.display = "block";
-    }
-}
-
-/**
- * Sets the theme for the page and stores the selected theme in a cookie.
- * 
- * @param {string} theme The theme to apply to the page.
- */
-function setTheme(theme) {
-    document.body.className = theme;
-    setCookie("theme", theme, 7);
-    document.getElementById("themeInfo").style.display = "none";
-}
+///**
+// * Retrieves the value of a specified cookie.
+// * 
+// * @param {string} name The name of the cookie to retrieve.
+// * @returns {string|null} The value of the cookie, or null if not found.
+// */
+//function getCookie(name) {
+//    let nameEQ = name + "=";
+//    let ca = document.cookie.split(';');
+//    for (let i = 0; i < ca.length; i++) {
+//        let c = ca[i];
+//        while (c.charAt(0) === ' ')
+//            c = c.substring(1, c.length);
+//        if (c.indexOf(nameEQ) === 0)
+//            return c.substring(nameEQ.length, c.length);
+//    }
+//    return null;
+//}
+//
+///**
+// * Sets a cookie with a specified name, value, and expiration time.
+// * 
+// * @param {string} name The name of the cookie to set.
+// * @param {string} value The value to store in the cookie.
+// * @param {number} days The number of days the cookie should be valid.
+// */
+//function setCookie(name, value, days) {
+//    let date = new Date();
+//    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+//    let expires = "expires=" + date.toUTCString();
+//    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+//}
+//
+///**
+// * Loads the theme from the cookie and displays a message if it was loaded from the cookie.
+// */
+//function loadThemeFromCookie() {
+//    const theme = getCookie("theme") || "green";
+//    if (theme) {
+//        document.body.className = theme;
+//        document.getElementById("themeInfo").style.display = "block";
+//    }
+//}
+//
+///**
+// * Sets the theme for the page and stores the selected theme in a cookie.
+// * 
+// * @param {string} theme The theme to apply to the page.
+// */
+//function setTheme(theme) {
+//    document.body.className = theme;
+//    setCookie("theme", theme, 7);
+//    document.getElementById("themeInfo").style.display = "none";
+//}
 
 /**
  * This function is executed when the window is loaded. 
@@ -175,5 +175,5 @@ function setTheme(theme) {
  */
 window.onload = function () {
     getAllSongsTable('tableSong');
-    loadThemeFromCookie();
+    //loadThemeFromCookie();
 };

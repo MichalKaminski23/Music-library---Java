@@ -1,5 +1,11 @@
 package mk.musiclibraryweb.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.io.Serializable;
 import lombok.Data;
 
 /**
@@ -7,45 +13,55 @@ import lombok.Data;
  * title, composer, album, release date, and duration.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 @Data
-public class Song {
+@Entity
+public class Song implements Serializable {
+
+    /**
+     * The unique ID of the song.
+     */
+    @Id
+    @Column(name = "songID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int songID;
 
     /**
      * The title of the song.
      */
+    @Column(name = "songTitle")
     private String songTitle;
 
     /**
      * The first name of the composer.
      */
+    @Column(name = "authorName")
     private String authorName;
 
     /**
      * The surname of the composer.
      */
+    @Column(name = "authorSurname")
     private String authorSurname;
 
     /**
      * The album the song belongs to.
      */
+    @Column(name = "songAlbum")
     private String songAlbum;
 
     /**
      * The release date of the song in the format 'dd.MM.yyyy'.
      */
+    @Column(name = "songRelease")
     private String songRelease;
 
     /**
      * The duration of the song in seconds.
      */
+    @Column(name = "songTime")
     private String songTime;
-
-    /**
-     * The unique ID of the song, generated using the songCounter.
-     */
-    private int songID;
 
     /**
      * A static counter used to assign unique IDs to each song.
@@ -70,6 +86,9 @@ public class Song {
         this.songAlbum = songAlbum;
         this.songRelease = songRelease;
         this.songTime = songTime;
+    }
+
+    public Song() {
     }
 
     /**

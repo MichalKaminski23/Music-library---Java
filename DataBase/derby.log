@@ -1,0 +1,104 @@
+Mon Dec 16 16:40:36 CET 2024 : Serwer sieciowy Apache Derby - 10.17.1.0 - (1913217) uruchomiony i gotowy do zaakceptowania połączeń na porcie 1527 w {3} 
+----------------------------------------------------------------
+Mon Dec 16 16:40:36 CET 2024:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217) systemu Derby: instancja a816c00e-0193-d020-e1e8-fffffb01365d
+w katalogu bazy danych C:\Users\placu\Music-library---Java\DataBase\lab jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 
+
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.4+8-LTS-274
+user.dir=C:\Users\placu\Music-library---Java\db-derby-10.17.1.0-bin\db-derby-10.17.1.0-bin
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\placu\Music-library---Java\DataBase
+Uruchomiono program ładujący klasę bazy danych - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Dec 16 16:40:37 CET 2024:
+Wyłączanie instancji a816c00e-0193-d020-e1e8-fffffb01365d
+Mon Dec 16 16:40:37 CET 2024 Thread[#33,DRDAConnThread_3,5,main] (DATABASE = lab), (DRDAID = {2}), Baza danych 'lab' została wyłączona.
+Mon Dec 16 16:40:50 CET 2024 Thread[#24,DRDAConnThread_2,5,main] Cleanup action starting
+java.sql.SQLException: Nie znaleziono bazy danych 'lab'.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:115)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:141)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:225)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:220)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(EmbedConnection.java:3208)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(EmbedConnection.java:767)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:437)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:629)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:295)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:921)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(EmbeddedDriver.java:125)
+	at org.apache.derby.impl.drda.Database.makeConnection(Database.java:253)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(DRDAConnThread.java:1474)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(DRDAConnThread.java:1424)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(DRDAConnThread.java:3378)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(DRDAConnThread.java:1208)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(DRDAConnThread.java:1008)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(DRDAConnThread.java:298)
+Caused by: ERROR XJ004: Nie znaleziono bazy danych 'lab'.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(SQLExceptionFactory.java:170)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:75)
+	... 17 more
+============= begin nested exception, level (1) ===========
+ERROR XJ004: Nie znaleziono bazy danych 'lab'.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:299)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(SQLExceptionFactory.java:170)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:75)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:141)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:225)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:220)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(EmbedConnection.java:3208)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(EmbedConnection.java:767)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:437)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:629)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:295)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:921)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(EmbeddedDriver.java:125)
+	at org.apache.derby.impl.drda.Database.makeConnection(Database.java:253)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(DRDAConnThread.java:1474)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(DRDAConnThread.java:1424)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(DRDAConnThread.java:3378)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(DRDAConnThread.java:1208)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(DRDAConnThread.java:1008)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(DRDAConnThread.java:298)
+============= end nested exception, level (1) ===========
+Cleanup action completed
+Mon Dec 16 16:40:50 CET 2024 Thread[#24,DRDAConnThread_2,5,main] (DATABASE = lab), (DRDAID = {3}), Nie znaleziono bazy danych 'lab'.
+----------------------------------------------------------------
+Mon Dec 16 16:41:03 CET 2024:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217) systemu Derby: instancja 97e00100-0193-d020-e1e8-fffffb01365d
+w katalogu bazy danych C:\Users\placu\Music-library---Java\DataBase\lab jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 
+
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.4+8-LTS-274
+user.dir=C:\Users\placu\Music-library---Java\db-derby-10.17.1.0-bin\db-derby-10.17.1.0-bin
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\placu\Music-library---Java\DataBase
+Uruchomiono program ładujący klasę bazy danych - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Dec 16 16:41:04 CET 2024:
+Wyłączanie instancji 97e00100-0193-d020-e1e8-fffffb01365d
+Mon Dec 16 16:41:04 CET 2024 Thread[#24,DRDAConnThread_2,5,main] (DATABASE = lab), (DRDAID = {5}), Baza danych 'lab' została wyłączona.
+----------------------------------------------------------------
+Mon Dec 16 16:41:11 CET 2024:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217) systemu Derby: instancja d76641ef-0193-d020-e1e8-fffffb01365d
+w katalogu bazy danych C:\Users\placu\Music-library---Java\DataBase\lab jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 
+
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.4+8-LTS-274
+user.dir=C:\Users\placu\Music-library---Java\db-derby-10.17.1.0-bin\db-derby-10.17.1.0-bin
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\placu\Music-library---Java\DataBase
+Uruchomiono program ładujący klasę bazy danych - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Dec 16 19:26:54 CET 2024: Shutting down Derby engine
+----------------------------------------------------------------
+Mon Dec 16 19:26:54 CET 2024:
+Wyłączanie instancji d76641ef-0193-d020-e1e8-fffffb01365d
+----------------------------------------------------------------

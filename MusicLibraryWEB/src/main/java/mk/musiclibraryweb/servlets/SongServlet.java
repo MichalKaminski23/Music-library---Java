@@ -1,5 +1,6 @@
 package mk.musiclibraryweb.servlets;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,8 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import mk.musiclibraryweb.models.SingletonModel;
+import mk.musiclibraryweb.models.DataBaseSource;
 import mk.musiclibraryweb.models.Song;
+import mk.musiclibraryweb.models.DataSource;
 
 /**
  * Servlet responsible for handling the song management operations. It retrieves
@@ -49,8 +51,11 @@ public class SongServlet extends HttpServlet {
         boolean showAll = songTitle == null || songTitle.length() == 0;
 
         PrintWriter out = response.getWriter();
+        
+        ServletContext context = request.getServletContext();
+        DataSource dataSource = (DataSource)context.getAttribute("DataSource");
 
-        for (Song song : SingletonModel.getInstance().getAllSongs()) {
+        for (Song song : dataSource.getAllSongs()) {
             if (showAll || song.getSongTitle().contains(songTitle)) {
                 out.println("<tr>");
                 out.println("<td>");

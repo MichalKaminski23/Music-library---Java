@@ -1,6 +1,7 @@
 package mk.musiclibraryweb.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 
@@ -9,16 +10,49 @@ import lombok.Data;
  * add, delete, and retrieve songs.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 @Data
-public class SongList {
+public class SongList implements DataSource {
 
     /**
      * A list that holds all the Song objects.
      */
     private final ArrayList<Song> allSongs = new ArrayList<Song>();
     private boolean ok = false;
+    
+    public SongList()
+    {
+        allSongs.add(new Song("Title 1", "Name 1", "Surname 1", "Album 1", "12.01.2024", "111"));
+        allSongs.add(new Song("Title 2", "Name 2", "Surname 2", "Album 2", "12.02.2024", "222"));
+        allSongs.add(new Song("Title 3", "Name 3", "Surname 3", "Album 3", "12.03.2024", "333"));
+    }
+    
+    @Override
+    public List<Song> getAllSongs() {
+        return allSongs;
+    }
+    
+    @Override
+    public boolean delete(int songID) {
+        return allSongs.removeIf(i -> i.getSongID()== songID);
+    }
+
+    @Override
+    public void persistObject(Object object) {
+        if(object instanceof Song song) allSongs.add(song);
+    }
+
+    @Override
+    public boolean update(Song song) {
+        for(int i = 0; i < allSongs.size(); ++i) {
+            if(allSongs.get(i).getSongID() == song.getSongID()) {
+                allSongs.set(i, song);
+                return true;
+            }
+        }        
+        return false;
+    }
 
     /**
      * A SongTitleChecker instance that checks if the existing song title is the
@@ -155,72 +189,3 @@ public class SongList {
         return s.isPresent();
     }
 }
-
-/**
- * // * Retrieves a set of unique authors from the song list and formats the //
- * * result as a string where each author's name is displayed on a separate // *
- * line. // * // * @return a formatted string containing unique authors //
- */
-//    public String getUniqueAuthors() {
-//        if (allSongs.isEmpty()) {
-//            return "No songs available";
-//        }
-//
-//        Set<String> uniqueAuthors = allSongs.stream()
-//                .map(song -> song.getAuthorName() + " " + song.getAuthorSurname())
-//                .collect(Collectors.toSet());
-//
-//        StringBuilder result = new StringBuilder();
-//        uniqueAuthors.forEach(author
-//                -> result.append(author).append("\n")
-//        );
-//
-//        return result.toString();
-//    }
-//
-//    /**
-//     * Retrieves the count of songs per album and formats the result as a string
-//     * where each album and its corresponding count are displayed on separate
-//     * lines.
-//     *
-//     * @return a formatted string containing album names and their respective
-//     * song counts
-//     */
-//    public String getSongCountPerAlbum() {
-//        if (allSongs.isEmpty()) {
-//            return "No songs available";
-//        }
-//        Map<String, Long> songCountMap = allSongs.stream()
-//                .collect(Collectors.groupingBy(Song::getSongAlbum, Collectors.counting()));
-//
-//        StringBuilder result = new StringBuilder();
-//        songCountMap.forEach((album, count)
-//                -> result.append(album).append(": ").append(count).append("\n")
-//        );
-//
-//        return result.toString();
-//    }
-//
-//    /**
-//     * Retrieves the title of the shortest song from the song list.
-//     *
-//     * @return the title of the shortest song, or null if the list is empty
-//     */
-//    public String getTheShortestSong() {
-//        return allSongs.stream()
-//                .min(Comparator.comparingInt(song -> Integer.valueOf(song.getSongTime())))
-//                .map(song -> song.getSongTitle() + " (duration: " + song.getSongTime() + " seconds)")
-//                .orElse("No songs available");
-//    }
-//
-//    /**
-//     * Retrieves the title of the longest song from the song list.
-//     *
-//     * @return the title of the longest song, or null if the list is empty
-//     */
-//    public String getTheLongestSong() {
-//        return allSongs.stream()
-//                .max(Comparator.comparingInt(song -> Integer.valueOf(song.getSongTime())))
-//                .map(song -> song.getSongTitle() + " (duration: " + song.getSongTime() + " seconds)")
-//                .orElse("No songs available");
-//    }

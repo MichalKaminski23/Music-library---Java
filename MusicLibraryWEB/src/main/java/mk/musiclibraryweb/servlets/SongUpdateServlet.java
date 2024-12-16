@@ -1,5 +1,6 @@
 package mk.musiclibraryweb.servlets;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,9 +8,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import mk.musiclibraryweb.models.DataBaseSource;
 import mk.musiclibraryweb.models.SingletonModel;
 import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.WrongInputException;
+import mk.musiclibraryweb.models.DataSource;
 
 /**
  * Servlet responsible for updating song details in the music library.
@@ -38,8 +41,11 @@ public class SongUpdateServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        ServletContext context = request.getServletContext();
+        DataSource dataSource = (DataSource)context.getAttribute("DataSource");
 
-        try {
+        //try {
             int songID = Integer.parseInt(request.getParameter("songID"));
             String songTitle = request.getParameter("songTitle");
             String authorName = request.getParameter("authorName");
@@ -48,13 +54,13 @@ public class SongUpdateServlet extends HttpServlet {
             String songRelease = request.getParameter("songRelease");
             String songTime = request.getParameter("songTime");
 
-            SingletonModel.getInstance().updateSong(songID, new Song(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime));
+            dataSource.update(new Song(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime));
 
             response.sendRedirect(request.getContextPath() + "/songs");
-        } catch (WrongInputException ex) {
-            out.println(ex.toString());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        }
+//        } catch (WrongInputException ex) {
+//            out.println(ex.toString());
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//        }
 
     }
 

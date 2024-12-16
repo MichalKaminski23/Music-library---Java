@@ -1,12 +1,17 @@
 package mk.musiclibraryweb.servlets;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import mk.musiclibraryweb.models.SingletonModel;
+import java.util.ArrayList;
+import mk.musiclibraryweb.models.DataBaseSource;
+import mk.musiclibraryweb.models.Song;
+import mk.musiclibraryweb.models.SongList;
+import mk.musiclibraryweb.models.DataSource;
 
 /**
  * Servlet responsible for deleting a song from the music library.
@@ -18,7 +23,7 @@ import mk.musiclibraryweb.models.SingletonModel;
  */
 @WebServlet("/songDelete")
 public class SongDeleteServlet extends HttpServlet {
-
+private final ArrayList<Song> allSongs = new ArrayList<Song>();
     /**
      * Processes the HTTP request for deleting a song from the music library.
      * It retrieves the song ID from the request parameter, deletes the song,
@@ -36,8 +41,9 @@ public class SongDeleteServlet extends HttpServlet {
         String idArg = request.getParameter("id");
 
         int id = Integer.parseInt(idArg);
-        
-        SingletonModel.getInstance().deleteOneByIndex(id);
+        ServletContext context = request.getServletContext();
+        DataSource dataSource = (DataSource)context.getAttribute("DataSource");
+        dataSource.delete(id);
         
         response.sendRedirect(request.getContextPath() + "/songs");
     }
