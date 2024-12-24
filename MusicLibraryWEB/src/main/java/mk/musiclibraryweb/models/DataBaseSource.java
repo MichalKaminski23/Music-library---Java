@@ -36,9 +36,12 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public void insert(Object object) {
+        if (object == null) {
+            throw new PersistenceException("Object can't be empty to insert!");
+        }
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         try {
+            em.getTransaction().begin();
             em.persist(object);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -56,8 +59,8 @@ public class DataBaseSource implements DataSource {
     @Override
     public List<Song> getAllSongs() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         try {
+            em.getTransaction().begin();
             Query query = em.createQuery("SELECT s FROM Song s");
             return query.getResultList();
         } catch (PersistenceException e) {
@@ -77,12 +80,16 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public boolean update(Song song) {
-        try (EntityManager em = emf.createEntityManager()) {
+        if (song == null) {
+            throw new PersistenceException("Song can't be empty to update!");
+        }
+        EntityManager em = emf.createEntityManager();
+        try {
             em.getTransaction().begin();
             em.merge(song);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            System.err.println("Error while updating song: " + ex.getMessage());
+            em.getTransaction().rollback();
         }
         return true;
     }
@@ -96,6 +103,9 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public boolean delete(int songID) {
+        if (songID <= 0) {
+            throw new PersistenceException("Song ID can't be empty to delete!");
+        }
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -121,6 +131,9 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public Song findById(int songID) {
+        if (songID <= 0) {
+            throw new IllegalArgumentException("The song ID must be positive and not null.");
+        }
         try (EntityManager em = emf.createEntityManager()) {
             return em.find(Song.class, songID);
         } catch (Exception ex) {
@@ -138,6 +151,9 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public boolean isSongTitleTaken(String songTitle) {
+        if (songTitle == null || songTitle.trim().isEmpty()) {
+            throw new IllegalArgumentException("Song title cannot be null, empty, or blank.");
+        }
         try (EntityManager em = emf.createEntityManager()) {
             Long count = em.createQuery("SELECT COUNT(s) FROM Song s WHERE s.songTitle = :songTitle", Long.class)
                     .setParameter("songTitle", songTitle)
@@ -158,6 +174,9 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public boolean isSongIDTaken(int songID) {
+        if (songID <= 0) {
+            throw new IllegalArgumentException("Song ID must be greater than 0.");
+        }
         try (EntityManager em = emf.createEntityManager()) {
             Long count = em.createQuery("SELECT COUNT(s) FROM Song s WHERE s.songID = :songID", Long.class)
                     .setParameter("songID", songID)
