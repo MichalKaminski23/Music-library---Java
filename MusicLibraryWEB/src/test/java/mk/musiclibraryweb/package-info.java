@@ -5,6 +5,6 @@
  * exceptions, and business logic.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 package mk.musiclibraryweb;

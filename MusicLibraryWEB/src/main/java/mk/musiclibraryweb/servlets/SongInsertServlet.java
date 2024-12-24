@@ -16,10 +16,13 @@ import mk.musiclibraryweb.models.DataSource;
  * Servlet responsible for handling the insertion of new songs into the music
  * library. It retrieves the song details from the request and adds the new song
  * to the model. If there is an error in the input, it returns a bad request
- * response.
+ * response. The servlet expects song details (ID, title, author, etc.) as
+ * request parameters, validates the input, and if all checks pass, inserts the
+ * new song into the library. If an error occurs during the input or validation,
+ * a message is returned to the user, and the status code is set to BAD_REQUEST.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 @WebServlet("/songInsert")
 public class SongInsertServlet extends HttpServlet {
@@ -38,45 +41,64 @@ public class SongInsertServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-    String songTitle = request.getParameter("songTitle");
-    String authorName = request.getParameter("authorName");
-    String authorSurname = request.getParameter("authorSurname");
-    String songAlbum = request.getParameter("songAlbum");
-    String songRelease = request.getParameter("songRelease");
-    String songTime = request.getParameter("songTime");
-
-    ServletContext context = request.getServletContext();
-    DataSource dataSource = (DataSource) context.getAttribute("DataSource");
-
-    try (PrintWriter out = response.getWriter()) {
-        if (isNullOrEmpty(songTitle) || isNullOrEmpty(authorName) || isNullOrEmpty(authorSurname) ||
-            isNullOrEmpty(songAlbum) || isNullOrEmpty(songRelease) || isNullOrEmpty(songTime)) {
-            
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            out.println("<h2>Invalid input: All fields are required!</h2>");
-            return;
-        }
+        ServletContext context = request.getServletContext();
+        DataSource dataSource = (DataSource) context.getAttribute("DataSource");
 
         try {
-            Song song = new Song(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime);
-            dataSource.persistObject(song);
+            String stringID = request.getParameter("songID");
+            String songTitle = request.getParameter("songTitle");
+            String authorName = request.getParameter("authorName");
+            String authorSurname = request.getParameter("authorSurname");
+            String songAlbum = request.getParameter("songAlbum");
+            String songRelease = request.getParameter("songRelease");
+            String songTime = request.getParameter("songTime");
+
+            if (stringID == null || stringID.isBlank()
+                    || songTitle == null || songTitle.isBlank()
+                    || authorName == null || authorName.isBlank()
+                    || authorSurname == null || authorSurname.isBlank()
+                    || songAlbum == null || songAlbum.isBlank()
+                    || songRelease == null || songRelease.isBlank()
+                    || songTime == null || songTime.isBlank()) {
+                throw new WrongInputException("All fields must be filled!");
+            }
+
+            if (!stringID.matches("\\d+") || Integer.parseInt(stringID) <= 0) {
+                throw new WrongInputException("Song ID must be a positive integer!");
+            }
+
+            int songID = Integer.parseInt(stringID);
+
+            if (!songTime.matches("\\d+") || Integer.parseInt(songTime) <= 0) {
+                throw new WrongInputException("Song time must be a valid positive number!");
+            }
+
+            if (!songRelease.matches("(0[1-9]|[1-2][0-9]|3[0-1])\\.(0[1-9]|1[0-2])\\.(19|20)\\d{2}")) {
+                throw new WrongInputException("Song release date must be in the format dd.MM.yyyy!");
+            }
+
+            if (dataSource.isSongTitleTaken(songTitle)) {
+                throw new WrongInputException("A song with the same title already exists!");
+            }
+
+            if (dataSource.isSongIDTaken(songID)) {
+                throw new WrongInputException("A song with the same ID already exists!");
+            }
+
+            Song song = new Song(songID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTime);
+            dataSource.insert(song);
 
             response.sendRedirect(request.getContextPath() + "/songs");
         } catch (WrongInputException ex) {
+            out.println("<html><body><h3>Error:</h3><p>" + ex.getMessage() + "</p></body></html>");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            out.println("<h2>Error: " + ex.getMessage() + "</h2>");
         }
     }
-}
-
-// Pomocnicza metoda do walidacji pustych danych
-private boolean isNullOrEmpty(String str) {
-    return str == null || str.trim().isEmpty();
-}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -120,5 +142,4 @@ private boolean isNullOrEmpty(String str) {
         return "Servlet for inserting new songs into the music library.";
     }
     // </editor-fold>
-
 }

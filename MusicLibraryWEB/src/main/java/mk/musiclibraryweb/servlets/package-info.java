@@ -7,6 +7,6 @@
  * and send appropriate responses to the client-side (e.g., HTML, JSON).
  * 
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 package mk.musiclibraryweb.servlets;

@@ -19,6 +19,7 @@ function getAllSongsTable(tableID) {
  * Sends an HTTP GET request to add a new song with the data from the input fields.
  * If the request is successful, the table of songs is updated. Otherwise, an error message is shown.
  * 
+ * @param {string} songID The ID of the input field for the song ID.
  * @param {string} songTitle The ID of the input field for the song title.
  * @param {string} authorName The ID of the input field for the author's first name.
  * @param {string} authorSurname The ID of the input field for the author's surname.
@@ -28,7 +29,7 @@ function getAllSongsTable(tableID) {
  * @param {string} tableId The ID of the table element to update after adding the song.
  * @param {string} errorInfo The ID of the element where error messages will be displayed.
  */
-function addNewSong(songTitle, authorName, authorSurname, songAlbum, songRelease, songTime, tableId, errorInfo) {
+function addNewSong(songID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTime, tableId, errorInfo) {
     document.getElementById(errorInfo).innerHTML = "&nbsp;";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -41,14 +42,15 @@ function addNewSong(songTitle, authorName, authorSurname, songAlbum, songRelease
         }
     };
 
-    var ar1 = document.getElementById(songTitle).value;
-    var ar2 = document.getElementById(authorName).value;
-    var ar3 = document.getElementById(authorSurname).value;
-    var ar4 = document.getElementById(songAlbum).value;
-    var ar5 = document.getElementById(songRelease).value;
-    var ar6 = document.getElementById(songTime).value;
+    var ar1 = document.getElementById(songID).value;
+    var ar2 = document.getElementById(songTitle).value;
+    var ar3 = document.getElementById(authorName).value;
+    var ar4 = document.getElementById(authorSurname).value;
+    var ar5 = document.getElementById(songAlbum).value;
+    var ar6 = document.getElementById(songRelease).value;
+    var ar7 = document.getElementById(songTime).value;
 
-    xhttp.open("GET", "songInsert?songTitle=" + ar1 + "&authorName=" + ar2 + "&authorSurname=" + ar3 + "&songAlbum=" + ar4 + "&songRelease=" + ar5 + "&songTime=" + ar6, true);
+    xhttp.open("GET", "songInsert?&songID=" + ar1 + "&songTitle=" + ar2 + "&authorName=" + ar3 + "&authorSurname=" + ar4 + "&songAlbum=" + ar5 + "&songRelease=" + ar6 + "&songTime=" + ar7, true);
     xhttp.send();
 }
 

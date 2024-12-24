@@ -7,22 +7,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.DataSource;
 
 /**
  * Servlet responsible for deleting a song from the music library. This servlet
  * processes requests to delete a song by its ID. After the deletion, the user
- * is redirected to the songs list.
+ * is redirected to the songs list. The servlet expects the song ID as a request
+ * parameter, deletes the song from the data source, and then redirects the user
+ * to the page displaying the list of songs.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 @WebServlet("/songDelete")
 public class SongDeleteServlet extends HttpServlet {
-
-    private final ArrayList<Song> allSongs = new ArrayList<Song>();
 
     /**
      * Processes the HTTP request for deleting a song from the music library. It
@@ -37,18 +35,20 @@ public class SongDeleteServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html;charset=UTF-8");
-        String idArg = request.getParameter("id");
 
-        int id = Integer.parseInt(idArg);
+        response.setContentType("text/html;charset=UTF-8");
+
+        String stringID = request.getParameter("id");
+        int songID = Integer.parseInt(stringID);
+
         ServletContext context = request.getServletContext();
         DataSource dataSource = (DataSource) context.getAttribute("DataSource");
-        dataSource.delete(id);
+        dataSource.delete(songID);
 
         response.sendRedirect(request.getContextPath() + "/songs");
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP GET method for deleting a song. Delegates the request
      * processing to the processRequest method.
@@ -90,4 +90,5 @@ public class SongDeleteServlet extends HttpServlet {
     public String getServletInfo() {
         return "Servlet for deleting a song from the music library";
     }
+    // </editor-fold>
 }

@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import mk.musiclibraryweb.models.DataBaseSource;
 import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.DataSource;
 
@@ -18,7 +17,7 @@ import mk.musiclibraryweb.models.DataSource;
  * functionality for searching, updating, and deleting songs.
  *
  * @author Michal Kaminski
- * @version 5.0
+ * @version 6.0
  */
 @WebServlet("/songs")
 public class SongServlet extends HttpServlet {
@@ -51,13 +50,16 @@ public class SongServlet extends HttpServlet {
         boolean showAll = songTitle == null || songTitle.length() == 0;
 
         PrintWriter out = response.getWriter();
-        
+
         ServletContext context = request.getServletContext();
-        DataSource dataSource = (DataSource)context.getAttribute("DataSource");
+        DataSource dataSource = (DataSource) context.getAttribute("DataSource");
 
         for (Song song : dataSource.getAllSongs()) {
             if (showAll || song.getSongTitle().contains(songTitle)) {
                 out.println("<tr>");
+                out.println("<td>");
+                out.println("<input type=\"text\" id=\"songID\" name=\"songID\" placeholder=\"Song ID\" value=\"" + song.getSongID() + "\" readonly/>");
+                out.println("</td>");
                 out.println("<td>");
                 out.println("<input type=\"text\" id=\"songTitle\" name=\"songTitle\" placeholder=\"Song title\" value=\"" + song.getSongTitle() + "\" readonly/>");
                 out.println("</td>");
@@ -92,8 +94,9 @@ public class SongServlet extends HttpServlet {
      * Handles the HTTP <code>GET</code> method. This method is invoked when a
      * GET request is received by the servlet.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request the HttpServletRequest object containing the request
+     * details
+     * @param response the HttpServletResponse object used to send the response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -107,8 +110,9 @@ public class SongServlet extends HttpServlet {
      * Handles the HTTP <code>POST</code> method. This method is invoked when a
      * POST request is received by the servlet.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request the HttpServletRequest object containing the request
+     * details
+     * @param response the HttpServletResponse object used to send the response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -119,15 +123,13 @@ public class SongServlet extends HttpServlet {
     }
 
     /**
-     * Returns a short description of the servlet. This method provides a brief
-     * description of the servlet.
+     * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
-        return "Servlet for managing songs in the music library, including searching, updating, and deleting songs.";
+        return "Servlet for managing songs in the music library.";
     }
-    // </editor-fold>
-
+// </editor-fold>
 }
