@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import mk.musiclibraryweb.models.Album;
 import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.WrongInputException;
 import mk.musiclibraryweb.models.DataSource;
@@ -19,7 +20,8 @@ import mk.musiclibraryweb.models.DataSource;
  * response. The servlet expects song details (ID, title, author, etc.) as
  * request parameters, validates the input, and if all checks pass, inserts the
  * new song into the library. If an error occurs during the input or validation,
- * a message is returned to the user, and the status code is set to BAD_REQUEST.
+ * a message is returned to the user, and the status code is set to
+ * {@code BAD_REQUEST}.
  *
  * @author Michal Kaminski
  * @version 6.0
@@ -29,14 +31,22 @@ public class SongInsertServlet extends HttpServlet {
 
     /**
      * Processes the HTTP request to insert a new song into the music library.
-     * It reads the song details from the request parameters, and attempts to
-     * add the song. If the input is valid, the song is added, and the user is
-     * redirected to the songs list. If there is an error in the input, an
-     * exception is thrown and the error message is returned.
+     * It reads the song details from the request parameters, validates the
+     * input, and attempts to add the song. If the input is valid, the song is
+     * added, and the user is redirected to the songs list. If there is an error
+     * in the input, an exception is thrown and the error message is returned.
      *
-     * @param request the HttpServletRequest object containing the request
-     * details
-     * @param response the HttpServletResponse object used to send the response
+     * This method performs the following steps: Retrieves song details from
+     * request parameters. Validates the input data for completeness and
+     * correctness. Checks for the uniqueness of song title and ID. Inserts the
+     * album if it does not already exist. Inserts the new song into the data
+     * source. Redirects the user to the songs list upon successful insertion.
+     * Handles and reports input validation errors.
+     *
+     * @param request the {@link HttpServletRequest} object containing the
+     * request details
+     * @param response the {@link HttpServletResponse} object used to send the
+     * response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -54,7 +64,8 @@ public class SongInsertServlet extends HttpServlet {
             String songTitle = request.getParameter("songTitle");
             String authorName = request.getParameter("authorName");
             String authorSurname = request.getParameter("authorSurname");
-            String songAlbum = request.getParameter("songAlbum");
+            String songAlbumID = request.getParameter("albumID");
+            String songAlbumName = request.getParameter("albumName");
             String songRelease = request.getParameter("songRelease");
             String songTime = request.getParameter("songTime");
 
@@ -62,7 +73,8 @@ public class SongInsertServlet extends HttpServlet {
                     || songTitle == null || songTitle.isBlank()
                     || authorName == null || authorName.isBlank()
                     || authorSurname == null || authorSurname.isBlank()
-                    || songAlbum == null || songAlbum.isBlank()
+                    || songAlbumID == null || songAlbumID.isBlank()
+                    || songAlbumName == null || songAlbumName.isBlank()
                     || songRelease == null || songRelease.isBlank()
                     || songTime == null || songTime.isBlank()) {
                 throw new WrongInputException("All fields must be filled!");
@@ -70,6 +82,10 @@ public class SongInsertServlet extends HttpServlet {
 
             if (!stringID.matches("\\d+") || Integer.parseInt(stringID) <= 0) {
                 throw new WrongInputException("Song ID must be a positive integer!");
+            }
+
+            if (!songAlbumID.matches("\\d+") || Integer.parseInt(songAlbumID) <= 0) {
+                throw new WrongInputException("Album ID must be a positive integer!");
             }
 
             int songID = Integer.parseInt(stringID);
@@ -88,6 +104,14 @@ public class SongInsertServlet extends HttpServlet {
 
             if (dataSource.isSongIDTaken(songID)) {
                 throw new WrongInputException("A song with the same ID already exists!");
+            }
+
+            int albumID = Integer.parseInt(songAlbumID);
+
+            Album songAlbum = dataSource.findAlbumByID(albumID);
+            if (songAlbum == null) {
+                songAlbum = new Album(albumID, songAlbumName);
+                dataSource.insert(songAlbum);
             }
 
             Song song = new Song(songID, songTitle, authorName, authorSurname, songAlbum, songRelease, songTime);

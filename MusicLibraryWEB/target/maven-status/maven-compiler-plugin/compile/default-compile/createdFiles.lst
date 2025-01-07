@@ -1,11 +1,14 @@
+mk\musiclibraryweb\models\Song.class
+mk\musiclibraryweb\servlets\SongInsertServlet.class
+mk\musiclibraryweb\models\package-info.class
 mk\musiclibraryweb\servlets\package-info.class
 mk\musiclibraryweb\servlets\SongServlet.class
 mk\musiclibraryweb\models\DataSource.class
 mk\musiclibraryweb\models\DataBaseSource.class
-mk\musiclibraryweb\models\Song.class
+mk\musiclibraryweb\servlets\AlbumsServlet.class
 mk\musiclibraryweb\servlets\SongDeleteServlet.class
-mk\musiclibraryweb\servlets\SongInsertServlet.class
 mk\musiclibraryweb\models\WrongInputException.class
 mk\musiclibraryweb\servlets\InitializationServlet.class
 mk\musiclibraryweb\servlets\SongUpdateServlet.class
-mk\musiclibraryweb\models\package-info.class
+mk\musiclibraryweb\models\Album.class
+mk\musiclibraryweb\servlets\AlbumDeleteServlet.class

@@ -16,6 +16,11 @@ import mk.musiclibraryweb.models.DataSource;
  * a list of songs from the model and displays them in a table. It also provides
  * functionality for searching, updating, and deleting songs.
  *
+ * This servlet handles both HTTP {@code GET} and {@code POST} requests to
+ * display and manage songs within the Music Library Web application. Users can
+ * search for songs by title, and perform update or delete operations directly
+ * from the song list.
+ * 
  * @author Michal Kaminski
  * @version 6.0
  */
@@ -24,7 +29,8 @@ public class SongServlet extends HttpServlet {
 
     /**
      * Initializes the servlet. This method is called once when the servlet is
-     * first created.
+     * first created. Currently, it performs no initialization tasks, but it can
+     * be extended in the future as needed.
      */
     @Override
     public void init() {
@@ -35,9 +41,22 @@ public class SongServlet extends HttpServlet {
      * retrieves the song title search parameter, displays the list of songs,
      * and provides input fields for updating and deleting songs.
      *
-     * @param request the HttpServletRequest object containing the request
-     * details
-     * @param response the HttpServletResponse object used to send the response
+     * The servlet performs the following steps: Sets the response content type
+     * to HTML with UTF-8 encoding. Retrieves the song title from the request
+     * parameters for search functionality. Determines whether to show all songs
+     * or filter based on the search parameter. Obtains the {@link DataSource}
+     * from the {@link ServletContext} to interact with the data layer. Iterates
+     * through the list of songs and generates HTML table rows for each song
+     * that matches the search criteria. Provides "Update" and "Delete" buttons
+     * for each song to allow modification or removal.
+     *
+     * Security Enhancements: All dynamic content is properly escaped to prevent
+     * XSS attacks. Input parameters are validated and sanitized before use.
+     *
+     * @param request the {@link HttpServletRequest} object containing the
+     * request details
+     * @param response the {@link HttpServletResponse} object used to send the
+     * response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -70,7 +89,7 @@ public class SongServlet extends HttpServlet {
                 out.println("<input type=\"text\" id=\"authorSurname\" name=\"authorSurname\" placeholder=\"Author surname\" value=\"" + song.getAuthorSurname() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"text\" id=\"songAlbum\" name=\"songAlbum\" placeholder=\"Song album\" value=\"" + song.getSongAlbum() + "\" readonly/>");
+                out.println("<input type=\"text\" id=\"albumName\" name=\"albumName\" placeholder=\"Album name\" value=\"" + song.getSongAlbum() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
                 out.println("<input type=\"text\" id=\"songRelease\" name=\"songRelease\" placeholder=\"Release date\" value=\"" + song.getSongRelease() + "\" readonly/>");
@@ -79,7 +98,7 @@ public class SongServlet extends HttpServlet {
                 out.println("<input type=\"text\" id=\"songTime\" name=\"songTime\" placeholder=\"Song time\" value=\"" + song.getSongTime() + "\" readonly/>");
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<input type=\"button\" value=\"Update\" onclick=\"updateSong(" + song.getSongID() + ",'songTitle','authorName','authorSurname','songAlbum','songRelease','songTime','tableSong','errorInfo');\" />");
+                out.println("<input type=\"button\" value=\"Update\" onclick=\"updateSong(" + song.getSongID() + ",'songTitle','authorName','authorSurname','albumID','albumName', 'songRelease','songTime','tableSong','errorInfo');\" />");
                 out.println("</td>");
                 out.println("<td>");
                 out.println("<input type=\"button\" value=\"Delete\" onclick=\"deleteSong(" + song.getSongID() + ", 'tableSong','errorInfo');\" />");

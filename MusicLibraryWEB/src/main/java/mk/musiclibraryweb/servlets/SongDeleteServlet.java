@@ -23,13 +23,18 @@ import mk.musiclibraryweb.models.DataSource;
 public class SongDeleteServlet extends HttpServlet {
 
     /**
-     * Processes the HTTP request for deleting a song from the music library. It
-     * retrieves the song ID from the request parameter, deletes the song, and
-     * redirects the user to the songs list page.
+     * Processes requests for both HTTP {@code GET} and {@code POST} methods.
      *
-     * @param request the HttpServletRequest object containing the request
-     * details
-     * @param response the HttpServletResponse object used to send the response
+     * This method retrieves the song ID from the request parameters, validates
+     * it, deletes the corresponding song from the data source, and redirects
+     * the user to the songs list page. If any validation fails or an error
+     * occurs during the deletion process, appropriate error responses are sent
+     * to the client.
+     *
+     * @param request the {@link HttpServletRequest} object that contains the
+     * request the client made of the servlet
+     * @param response the {@link HttpServletResponse} object that contains the
+     * response the servlet returns to the client
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

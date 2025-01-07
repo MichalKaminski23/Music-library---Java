@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import mk.musiclibraryweb.models.Album;
 import mk.musiclibraryweb.models.Song;
 import mk.musiclibraryweb.models.WrongInputException;
 import mk.musiclibraryweb.models.DataSource;
@@ -28,11 +29,23 @@ public class SongUpdateServlet extends HttpServlet {
     /**
      * Processes the HTTP request for updating song details. It retrieves the
      * song details from the request parameters, validates the input, and
-     * updates the song in the DataSource instance.
+     * updates the song in the {@link DataSource} instance.
      *
-     * @param request the HttpServletRequest object containing the request
-     * details
-     * @param response the HttpServletResponse object used to send the response
+     * This method performs the following steps: Sets the response content type
+     * to HTML with UTF-8 encoding. Retrieves song details from request
+     * parameters. Validates the input data for completeness and correctness.
+     * Checks for the uniqueness of song title and album details. Retrieves or
+     * creates the associated {@link Album}. Updates the existing {@link Song}
+     * with new details. Redirects the user to the songs list upon successful
+     * update. Handles and reports input validation errors.
+     *
+     * Security Enhancements: All dynamic content is properly escaped to prevent
+     * XSS attacks. Input parameters are validated and sanitized before use.
+     *
+     * @param request the {@link HttpServletRequest} object containing the
+     * request details
+     * @param response the {@link HttpServletResponse} object used to send the
+     * response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -50,14 +63,23 @@ public class SongUpdateServlet extends HttpServlet {
             String songTitle = request.getParameter("songTitle");
             String authorName = request.getParameter("authorName");
             String authorSurname = request.getParameter("authorSurname");
-            String songAlbum = request.getParameter("songAlbum");
+            String songAlbumID = request.getParameter("albumID");
+            String songAlbumName = request.getParameter("albumName");
             String songRelease = request.getParameter("songRelease");
             String songTime = request.getParameter("songTime");
 
-            if (songTitle == null || songTitle.isBlank() || authorName == null || authorName.isBlank()
-                    || authorSurname == null || authorSurname.isBlank() || songAlbum == null || songAlbum.isBlank()
-                    || songRelease == null || songRelease.isBlank() || songTime == null || songTime.isBlank()) {
+            if (songTitle == null || songTitle.isBlank()
+                    || authorName == null || authorName.isBlank()
+                    || authorSurname == null || authorSurname.isBlank()
+                    || songAlbumID == null || songAlbumID.isBlank()
+                    || songAlbumName == null || songAlbumName.isBlank()
+                    || songRelease == null || songRelease.isBlank()
+                    || songTime == null || songTime.isBlank()) {
                 throw new WrongInputException("All fields must be filled!");
+            }
+
+            if (!songAlbumID.matches("\\d+") || Integer.parseInt(songAlbumID) <= 0) {
+                throw new WrongInputException("Album ID must be a positive integer!");
             }
 
             int songID = Integer.parseInt(stringID);
@@ -74,7 +96,24 @@ public class SongUpdateServlet extends HttpServlet {
                 throw new WrongInputException("A song with the same title already exists!");
             }
 
+            int albumID = Integer.parseInt(songAlbumID);
+
+            if (dataSource.isAlbumNameTaken(songAlbumName)) {
+                throw new WrongInputException("A album with the same name already exists!");
+            }
+
+            if (dataSource.isAlbumIDTaken(albumID)) {
+                throw new WrongInputException("A album with the same ID already exists!");
+            }
+
+            Album songAlbum = dataSource.findAlbumByID(albumID);
+            if (songAlbum == null) {
+                songAlbum = new Album(albumID, songAlbumName);
+                dataSource.insert(songAlbum);
+            }
+
             Song existingSong = dataSource.findById(songID);
+
             existingSong.setSongTitle(songTitle);
             existingSong.setAuthorName(authorName);
             existingSong.setAuthorSurname(authorSurname);
@@ -130,7 +169,7 @@ public class SongUpdateServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Servlet for updating song details in the music library";
+        return "Servlet for updating song details in the music library.";
     }
     // </editor-fold>
 }

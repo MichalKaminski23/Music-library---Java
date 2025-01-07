@@ -1,6 +1,7 @@
 package mk.musiclibraryweb;
 
 import java.util.stream.Stream;
+import mk.musiclibraryweb.models.Album;
 import mk.musiclibraryweb.models.Song;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +20,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class SongTest {
 
     private Song testSong;
+    private static Album testAlbum = new Album(100, "Test album");
 
     /**
      * Sets up a default {@link Song} instance before each test.
@@ -28,7 +30,7 @@ public class SongTest {
      */
     @BeforeEach
     public void setUp() {
-        testSong = new Song(420, "Test title", "Test name", "Test surname", "Test album", "Test release", "Test duration");
+        testSong = new Song(420, "Test title", "Test name", "Test surname", testAlbum, "Test release", "Test duration");
     }
 
     /**
@@ -44,9 +46,9 @@ public class SongTest {
     static Stream<Song> provideSongs() {
         return Stream.of(
                 null,
-                new Song(1, "Title 1", "Author 1", "Surname 1", "Album 1", "12.12.2020", "300"),
-                new Song(2, "Title 2", "Author 2", "Surname 2", "Album 2", "01.01.2021", "150"),
-                new Song(3, "Title 3", "Author 3", "Surname 3", "Album 3", "20.07.2022", "180")
+                new Song(1, "Title 1", "Author 1", "Surname 1", testAlbum, "12.12.2020", "300"),
+                new Song(2, "Title 2", "Author 2", "Surname 2", testAlbum, "01.01.2021", "150"),
+                new Song(3, "Title 3", "Author 3", "Surname 3", testAlbum, "20.07.2022", "180")
         );
     }
 
