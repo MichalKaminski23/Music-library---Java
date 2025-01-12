@@ -20,7 +20,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class SongTest {
 
     private Song testSong;
-    private static Album testAlbum = new Album(100, "Test album");
+    private static Album testAlbum;
 
     /**
      * Sets up a default {@link Song} instance before each test.
@@ -30,7 +30,8 @@ public class SongTest {
      */
     @BeforeEach
     public void setUp() {
-        testSong = new Song(420, "Test title", "Test name", "Test surname", testAlbum, "Test release", "Test duration");
+        testAlbum = new Album(100, "Test album");
+        testSong = new Song(420, "Test title", "Test name", "Test surname", testAlbum, "12.04.2003", "69");
     }
 
     /**
@@ -46,9 +47,9 @@ public class SongTest {
     static Stream<Song> provideSongs() {
         return Stream.of(
                 null,
-                new Song(1, "Title 1", "Author 1", "Surname 1", testAlbum, "12.12.2020", "300"),
-                new Song(2, "Title 2", "Author 2", "Surname 2", testAlbum, "01.01.2021", "150"),
-                new Song(3, "Title 3", "Author 3", "Surname 3", testAlbum, "20.07.2022", "180")
+                new Song(101, "Title 1", "Author 1", "Surname 1", testAlbum, "12.12.2020", "300"),
+                new Song(201, "Title 2", "Author 2", "Surname 2", testAlbum, "01.01.2021", "150"),
+                new Song(301, "Title 3", "Author 3", "Surname 3", testAlbum, "20.07.2022", "180")
         );
     }
 

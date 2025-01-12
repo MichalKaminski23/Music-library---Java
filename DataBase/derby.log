@@ -1,7 +1,7 @@
-Tue Dec 24 12:00:24 CET 2024 : Serwer sieciowy Apache Derby - 10.17.1.0 - (1913217) uruchomiony i gotowy do zaakceptowania połączeń na porcie 1527 w {3} 
+Sun Jan 12 21:49:14 CET 2025 : Serwer sieciowy Apache Derby - 10.17.1.0 - (1913217) uruchomiony i gotowy do zaakceptowania połączeń na porcie 1527 w {3} 
 ----------------------------------------------------------------
-Tue Dec 24 12:00:38 CET 2024:
- Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217) systemu Derby: instancja a816c00e-0193-f853-389f-fffffb01365d
+Sun Jan 12 21:49:14 CET 2025:
+ Uruchamianie wersji The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217) systemu Derby: instancja a816c00e-0194-5c47-267f-fffffb01365d
 w katalogu bazy danych C:\Users\placu\Music-library---Java\DataBase\lab jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 
 
 java.vendor=Oracle Corporation
@@ -13,8 +13,8 @@ os.version=10.0
 derby.system.home=C:\Users\placu\Music-library---Java\DataBase
 Uruchomiono program ładujący klasę bazy danych - derby.database.classpath=''
 ----------------------------------------------------------------
-Tue Dec 24 13:12:44 CET 2024: Shutting down Derby engine
+Mon Jan 13 00:53:05 CET 2025: Shutting down Derby engine
 ----------------------------------------------------------------
-Tue Dec 24 13:12:44 CET 2024:
-Wyłączanie instancji a816c00e-0193-f853-389f-fffffb01365d
+Mon Jan 13 00:53:06 CET 2025:
+Wyłączanie instancji a816c00e-0194-5c47-267f-fffffb01365d
 ----------------------------------------------------------------

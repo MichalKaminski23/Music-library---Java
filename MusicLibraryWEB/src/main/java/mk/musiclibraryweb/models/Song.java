@@ -52,7 +52,7 @@ public class Song implements Serializable {
      * relationship with the {@link Album} class.
      */
     @ManyToOne
-    @JoinColumn(name = "albumID", referencedColumnName = "albumID")
+    @JoinColumn(name = "albumID")
     private Album songAlbum;
 
     /**

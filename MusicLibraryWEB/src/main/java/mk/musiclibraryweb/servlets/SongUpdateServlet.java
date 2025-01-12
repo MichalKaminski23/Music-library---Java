@@ -92,19 +92,19 @@ public class SongUpdateServlet extends HttpServlet {
                 throw new WrongInputException("Song release date must be in the format dd.MM.yyyy!");
             }
 
-            if (dataSource.isSongTitleTaken(songTitle)) {
-                throw new WrongInputException("A song with the same title already exists!");
-            }
+//            if (dataSource.isSongTitleTaken(songTitle)) {
+//                throw new WrongInputException("A song with the same title already exists!");
+//            }
 
             int albumID = Integer.parseInt(songAlbumID);
 
-            if (dataSource.isAlbumNameTaken(songAlbumName)) {
-                throw new WrongInputException("A album with the same name already exists!");
-            }
-
-            if (dataSource.isAlbumIDTaken(albumID)) {
-                throw new WrongInputException("A album with the same ID already exists!");
-            }
+//            if (dataSource.isAlbumNameTaken(songAlbumName)) {
+//                throw new WrongInputException("A album with the same name already exists!");
+//            }
+//
+//            if (dataSource.isAlbumIDTaken(albumID)) {
+//                throw new WrongInputException("A album with the same ID already exists!");
+//            }
 
             Album songAlbum = dataSource.findAlbumByID(albumID);
             if (songAlbum == null) {

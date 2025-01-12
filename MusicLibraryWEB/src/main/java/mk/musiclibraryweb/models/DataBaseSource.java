@@ -260,6 +260,9 @@ public class DataBaseSource implements DataSource {
      */
     @Override
     public Album findAlbumByID(int albumID) {
+        if (albumID <= 0) {
+            throw new IllegalArgumentException("The album ID must be positive and not null.");
+        }
         EntityManager em = emf.createEntityManager();
         try {
             return em.find(Album.class, albumID);
@@ -294,38 +297,38 @@ public class DataBaseSource implements DataSource {
     }
 
     /**
-     * Deletes an album from the database by its ID.
+     * Removes the album with the specified ID from the database, along with any
+     * associated songs. This method uses a JPA transaction to execute both
+     * deletions atomically. If the album exists, all songs linked to that album
+     * are deleted first, followed by the album itself. In case of an error, the
+     * transaction is rolled back.
      *
-     * This method retrieves the {@link Album} entity with the specified ID and
-     * removes it from the database. If the album does not exist, it logs a
-     * message and returns {@code false}. In case of any exceptions during the
-     * transaction, it is rolled back.
-     *
-     * @param albumID the ID of the album to be deleted
-     * @return {@code true} if the album was deleted successfully, {@code false}
-     * otherwise
-     * @throws PersistenceException if the {@code albumID} is invalid (e.g.,
-     * non-positive)
+     * @param albumID the unique identifier of the album to remove
+     * @return {@code true} if the album (and its related songs) were
+     * successfully deleted; {@code false} otherwise
      */
     @Override
     public boolean deleteAlbum(int albumID) {
         EntityManager em = emf.createEntityManager();
+        if (albumID <= 0) {
+            throw new PersistenceException("Album ID can't be empty to delete!");
+        }
         try {
+            em.getTransaction().begin();
             Album album = em.find(Album.class, albumID);
-            if (album == null) {
-                System.out.println("Album not found with ID: " + albumID);
-                return false;
+
+            if (album != null) {
+                Query query = em.createQuery("DELETE FROM Song s WHERE s.songAlbum = :album");
+                query.setParameter("album", album);
+                query.executeUpdate();
+
+                em.remove(album);
             }
 
-            em.getTransaction().begin();
-            em.remove(album);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
-
             em.getTransaction().rollback();
-
-            e.printStackTrace();
             return false;
         } finally {
             em.close();
